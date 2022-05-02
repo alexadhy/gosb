@@ -1,12 +1,13 @@
 package dto
 
 const (
-	userEndpoint              = "/users"
-	openChannelEndpoint       = "/open_channels"
-	groupChannelEndpoint      = "/group_channels"
-	customChannelEndpoint     = "/applications/settings_by_channel_custom_type"
-	defaultInvitationEndpoint = "/applications/default_channel_invitation_preference"
-	msgEndpoint               = "/messages"
+	userEndpoint              = "users"
+	openChannelEndpoint       = "open_channels"
+	groupChannelEndpoint      = "group_channels"
+	customChannelEndpoint     = "applications/settings_by_channel_custom_type"
+	defaultInvitationEndpoint = "applications/default_channel_invitation_preference"
+	settingsEndpoint          = "applications/settings"
+	msgEndpoint               = "messages"
 )
 
 // Order is the order url query value
@@ -134,4 +135,13 @@ const (
 	META_MODE_INC = MetaMode("increase")
 	META_MODE_DEC = MetaMode("decrease")
 	META_MODE_SET = MetaMode("set")
+)
+
+// ModerationAction is the moderation action field of profanity filter
+type ModerationAction string
+
+const (
+	MODERATION_ACTION_MUTE = ModerationAction("mute")
+	MODERATION_ACTION_KICK = ModerationAction("kick")
+	MODERATION_ACTION_BAN  = ModerationAction("ban")
 )

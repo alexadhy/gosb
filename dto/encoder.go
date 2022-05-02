@@ -20,7 +20,10 @@ type hasQSTag interface {
 		GroupChannelUnregisterOperatorRequest |
 		CustomChannelListSettingsRequest |
 		CustomChannelListOperatorsRequest |
-		CustomChannelUnregisterOperatorRequest
+		CustomChannelUnregisterOperatorRequest |
+		MessageListRequest |
+		MessageGetRequest |
+		EventSubscriptionListRequest
 }
 
 // encodeQS takes baseURL and struct with `qs` tag

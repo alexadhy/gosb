@@ -8,23 +8,29 @@ import (
 
 // UserResponse is returned on any endpoint with User data
 type UserResponse struct {
-	UserID             *string   `json:"user_id,omitempty"`
-	Nickname           *string   `json:"nickname,omitempty"`
-	UnreadMessageCount *int64    `json:"unread_message_count,omitempty"`
-	ProfileURL         *string   `json:"profile_url,omitempty"`
-	AccessToken        *string   `json:"access_token,omitempty"`
-	IsOnline           *bool     `json:"is_online,omitempty"`
-	IsActive           *bool     `json:"is_active,omitempty"`
-	CreatedAt          *int64    `json:"created_at,omitempty"`
-	LastSeenAt         *int64    `json:"last_seen_at,omitempty"`
-	DiscoveryKeys      []string  `json:"discovery_keys,omitempty"`
-	PreferredLanguages []string  `json:"preferred_languages,omitempty"`
-	HasEverLoggedIn    *bool     `json:"has_ever_logged_in,omitempty"`
-	Metadata           *Metadata `json:"metadata,omitempty"`
-	FriendDiscoveryKey []string  `json:"friend_discovery_key,omitempty"`
-	State              *string   `json:"state,omitempty"`
-	Role               *string   `json:"role,omitempty"`
-	Error              Error     `json:"error,omitempty"`
+	UserID                    *string   `json:"user_id,omitempty"`
+	Nickname                  *string   `json:"nickname,omitempty"`
+	UnreadMessageCount        *int64    `json:"unread_message_count,omitempty"`
+	ProfileURL                *string   `json:"profile_url,omitempty"`
+	AccessToken               *string   `json:"access_token,omitempty"`
+	IsOnline                  *bool     `json:"is_online,omitempty"`
+	IsActive                  *bool     `json:"is_active,omitempty"`
+	CreatedAt                 *int64    `json:"created_at,omitempty"`
+	LastSeenAt                *int64    `json:"last_seen_at,omitempty"`
+	DiscoveryKeys             []string  `json:"discovery_keys,omitempty"`
+	PreferredLanguages        []string  `json:"preferred_languages,omitempty"`
+	HasEverLoggedIn           *bool     `json:"has_ever_logged_in,omitempty"`
+	Metadata                  *Metadata `json:"metadata,omitempty"`
+	FriendDiscoveryKey        []string  `json:"friend_discovery_key,omitempty"`
+	State                     *string   `json:"state,omitempty"`
+	Role                      *string   `json:"role,omitempty"`
+	TotalUnreadMessageCount   *int      `json:"total_unread_message_count,omitempty"`
+	ChannelUnreadMessageCount *int      `json:"channel_unread_message_count,omitempty"`
+	ChannelMentionCount       *int      `json:"channel_mention_count,omitempty"`
+	PushEnabled               *bool     `json:"push_enabled,omitempty"`
+	PushTriggerOption         *string   `json:"push_trigger_option,omitempty"`
+	DoNotDisturb              *bool     `json:"do_not_disturb,omitempty"`
+	Error                     Error     `json:"error,omitempty"`
 }
 
 // UserGetRequest is the request payload to user GET endpoint
