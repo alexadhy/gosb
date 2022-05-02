@@ -15,6 +15,7 @@ type Settings struct {
 	Error                          Error                         `json:"error,omitempty"`
 }
 
+// DomainFilter is the domain filter
 type DomainFilter struct {
 	Domains           []string `json:"domains,omitempty"`
 	Type              *int64   `json:"type,omitempty"`

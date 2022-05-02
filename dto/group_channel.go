@@ -192,6 +192,9 @@ func (o GroupChannelCreateRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s", baseURL, groupChannelEndpoint)
 }
 
+// GroupChannelCreateResponse is alias for GroupChannelResponse
+type GroupChannelCreateResponse GroupChannelResponse
+
 // GroupChannelUpdateRequest is the payload to send to group channel create endpoint
 type GroupChannelUpdateRequest struct {
 	ChannelURL  string   `json:"channel_url"`
@@ -212,6 +215,9 @@ func (o GroupChannelUpdateRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s", baseURL, groupChannelEndpoint, o.ChannelURL)
 }
 
+// GroupChannelUpdateResponse is alias for GroupChannelResponse
+type GroupChannelUpdateResponse GroupChannelResponse
+
 // GroupChannelDeleteRequest is the constructor for creating delete group-channel endpoint URL
 type GroupChannelDeleteRequest struct {
 	ChannelURL string `json:"-"`
@@ -222,6 +228,9 @@ func (o GroupChannelDeleteRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s", baseURL, groupChannelEndpoint, o.ChannelURL)
 }
 
+// GroupChannelDeleteResponse is the response payload to group channel delete request
+type GroupChannelDeleteResponse GroupChannelResponse
+
 // GroupChannelJoinRequest is the request payload to join a public group channel
 type GroupChannelJoinRequest struct {
 	ChannelURL string `json:"-"`
@@ -230,9 +239,7 @@ type GroupChannelJoinRequest struct {
 }
 
 // GroupChannelJoinResponse is the response payload to group channel join endpoint
-type GroupChannelJoinResponse struct {
-	Error Error `json:"error,omitempty"`
-}
+type GroupChannelJoinResponse GroupChannelResponse
 
 // URL returns URL string for group channel join endpoint
 // PUT https://api-{application_id}.sendbird.com/v3/group_channels/{channel_url}/join
@@ -248,9 +255,7 @@ type GroupChannelLeaveRequest struct {
 }
 
 // GroupChannelLeaveResponse is the response payload to group channel leave endpoint
-type GroupChannelLeaveResponse struct {
-	Error Error `json:"error,omitempty"`
-}
+type GroupChannelLeaveResponse GroupChannelResponse
 
 // URL returns URL string to group channel leave endpoint
 func (o GroupChannelLeaveRequest) URL(baseURL string) string {
@@ -272,9 +277,7 @@ func (o GroupChannelHideRequest) URL(baseURL string) string {
 }
 
 // GroupChannelHideResponse is the response payload to hide group channel endpoint
-type GroupChannelHideResponse struct {
-	Error *Error `json:"error,omitempty"`
-}
+type GroupChannelHideResponse GroupChannelResponse
 
 // GroupChannelResetHistoryRequest is the payload to group_channel reset history endpoint
 type GroupChannelResetHistoryRequest struct {
@@ -290,9 +293,7 @@ func (o GroupChannelResetHistoryRequest) URL(baseURL string) string {
 }
 
 // GroupChannelResetHistoryResponse is the response to reset history endpoint
-type GroupChannelResetHistoryResponse struct {
-	Error *Error `json:"error,omitempty"`
-}
+type GroupChannelResetHistoryResponse GroupChannelResponse
 
 // GroupChannelListMembersRequest is the request type to list all Members in group_channel
 type GroupChannelListMembersRequest struct {
@@ -348,3 +349,51 @@ type GroupChannelCheckMemberResponse struct {
 	IsMember *bool  `json:"is_member,omitempty"`
 	Error    *Error `json:"error,omitempty"`
 }
+
+// GroupChannelInviteMembersRequest is the request payload to invite members endpoint
+type GroupChannelInviteMembersRequest struct {
+	ChannelURL       string                      `json:"-"`
+	UserIDs          []string                    `json:"user_ids,omitempty"`
+	Users            []UserResponse              `json:"users,omitempty"`
+	InvitationStatus map[string]InvitationStatus `json:"invitation_status,omitempty"`
+	HiddenStatus     map[string]HiddenMode       `json:"hidden_status,omitempty"`
+}
+
+// URL returns URL string to group_channel invite member endpoint
+// POST https://api-{application_id}.sendbird.com/v3/group_channels/{channel_url}/invite
+func (o GroupChannelInviteMembersRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/%s/%s/invite", baseURL, groupChannelEndpoint, o.ChannelURL)
+}
+
+// GroupChannelInviteMembersResponse is an alias for GroupChannelResponse
+type GroupChannelInviteMembersResponse GroupChannelResponse
+
+// GroupChannelAcceptInviteRequest is the request payload to accept group_channel invitation
+type GroupChannelAcceptInviteRequest struct {
+	ChannelURL string   `json:"-"`
+	UserIDs    []string `json:"user_ids,omitempty"`
+	AccessCode *string  `json:"access_code,omitempty"`
+}
+
+// URL returns URL string to accept group_channel invitation endpoint
+// PUT https://api-{application_id}.sendbird.com/v3/group_channels/{channel_url}/accept
+func (o GroupChannelAcceptInviteRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/%s/%s/accept", baseURL, groupChannelEndpoint, o.ChannelURL)
+}
+
+// GroupChannelAcceptInviteResponse is an alias for GroupChannelResponse
+type GroupChannelAcceptInviteResponse GroupChannelResponse
+
+// GroupChannelDeclineInviteRequest is the payload request to decline invitation
+type GroupChannelDeclineInviteRequest struct {
+	ChannelURL string `json:"-"`
+	UserID     string `json:"user_id"`
+}
+
+// URL returns URL string to decline invitation endpoint
+func (o GroupChannelDeclineInviteRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/%s/%s/decline", baseURL, groupChannelEndpoint, o.ChannelURL)
+}
+
+// GroupChannelDeclineInviteResponse is an alias for GroupChannelResponse
+type GroupChannelDeclineInviteResponse GroupChannelResponse

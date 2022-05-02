@@ -118,3 +118,20 @@ const (
 	MUTED_MEMBER_FILTER_MUTED   = MutedMemberFilter("muted")
 	MUTED_MEMBER_FILTER_UNMUTED = MutedMemberFilter("unmuted")
 )
+
+// ChannelType is the field to restrict channel type
+type ChannelType string
+
+const (
+	CHANNEL_TYPE_OPEN  = ChannelType("open_channels")
+	CHANNEL_TYPE_GROUP = ChannelType("group_channels")
+)
+
+// MetaMode is the metacounter value mode
+type MetaMode string
+
+const (
+	META_MODE_INC = MetaMode("increase")
+	META_MODE_DEC = MetaMode("decrease")
+	META_MODE_SET = MetaMode("set")
+)

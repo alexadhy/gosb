@@ -5,6 +5,7 @@ import (
 	"errors"
 )
 
+// ThreadInfo is thread info about messages
 type ThreadInfo struct {
 	ReplyCount    *int64           `json:"reply_count,omitempty"`
 	MostReplies   []map[string]any `json:"most_replies,omitempty"`
@@ -120,4 +121,21 @@ type AdminMessage struct {
 	Message string     `json:"message"`
 	Data    *string    `json:"data,omitempty"`
 	OGTag   *OpenGraph `json:"og_tag,omitempty"`
+}
+
+// MessageListRequest is the payload to list messages
+type MessageListRequest struct {
+	ChannelType    ChannelType     `json:"-" qs:"-"`
+	ChannelURL     string          `json:"-" qs:"-"`
+	MessageTS      *int64          `qs:"message_ts,omitempty"`
+	MessageID      *string         `qs:"message_id,omitempty"`
+	PrevLimit      *int            `qs:"prev_limit,omitempty"`
+	NextLimit      *int            `qs:"next_limit,omitempty"`
+	Include        *bool           `qs:"include,omitempty"`
+	Reverse        *bool           `qs:"reverse,omitempty"`
+	SenderID       *string         `qs:"sender_id,omitempty"`
+	SenderIDs      []string        `qs:"sender_ids,comma,omitempty"`
+	OperatorFilter *OperatorFilter `qs:"operator_filter,omitempty"`
+	MessageType    *string         `qs:"message_type,omitempty"`
+	CustomTypes    []string        `qs:"custom_type,comma,omitempty"`
 }

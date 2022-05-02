@@ -6,9 +6,6 @@ import (
 	"time"
 )
 
-// Metadata is returned on any object that has metadata
-type Metadata map[string]any
-
 // UserResponse is returned on any endpoint with User data
 type UserResponse struct {
 	UserID             *string   `json:"user_id,omitempty"`
