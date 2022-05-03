@@ -22,7 +22,11 @@ type hasQSTag interface {
 		CustomChannelListOperatorsRequest |
 		CustomChannelUnregisterOperatorRequest |
 		MessageListRequest |
+		MessageListThreadedRepliesRequest |
 		MessageGetRequest |
+		MessageDeleteMetaRequest |
+		MessageViewReplyRequest |
+		MessageViewThreadInfoRequest |
 		EventSubscriptionListRequest
 }
 
