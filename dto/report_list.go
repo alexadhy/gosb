@@ -33,3 +33,100 @@ func (r ListReportRequest) URL(baseURL string) string {
 	s, _ := encodeQS[ListReportRequest](base, r)
 	return s
 }
+
+type ListReportUserRequest struct {
+	OffendingUserId string
+	Token           string `qs:"token"`
+	Limit           int    `qs:"limit"`
+}
+
+type ListReportUserResponse struct {
+	ReportLogs []ReportResource `json:"report_logs"`
+	Next       string           `json:"next"`
+}
+
+func (r ListReportUserRequest) URL(baseURL string) string {
+	base := fmt.Sprintf("%s/%s/users/%s", baseURL, reportEndpoint, r.OffendingUserId)
+	s, _ := encodeQS[ListReportUserRequest](base, r)
+	return s
+}
+
+type listReportChannel struct{}
+
+type ListReportChannelRequest struct {
+	ChannelType string `json:"channel_type"`
+	ChannelURL  string `json:"channel_url"`
+	Token       string `qs:"token"`
+	Limit       int    `qs:"limit"`
+}
+
+type listReportChannelResponse struct {
+	ReportLogs []ReportResource `json:"report_logs"`
+	Next       string           `json:"next"`
+}
+
+func (r ListReportChannelRequest) URL(baseURL string) string {
+	base := fmt.Sprintf("%s/%s/%s/%s", baseURL, reportEndpoint, r.ChannelType, r.ChannelURL)
+	base, _ = encodeQS[ListReportChannelRequest](base, r)
+	return base
+}
+
+type ListReportMessage struct{}
+
+type ListReportMessageRequest struct {
+	ChannelType string `json:"channel_type"`
+	ChannelURL  string `json:"channel_url"`
+	MessageID   string `json:"message_id:`
+	Token       string `qs:"token"`
+	Limit       int    `qs:"limit"`
+}
+
+type ListReportMessageResponse struct {
+	ReportLogs []ReportResource `json:"report_logs"`
+	Next       string           `json:"next"`
+}
+
+func (r ListReportMessageRequest) URL(baseURL string) string {
+	base := fmt.Sprintf("%s/%s/%s/%s/messages/%s", baseURL, reportEndpoint, r.ChannelType, r.ChannelURL, r.MessageID)
+	base, _ = encodeQS[ListReportMessageRequest](base, r)
+	return base
+}
+
+type ModeratedMessage struct{}
+
+type ListReportModerationMessage struct{}
+
+type ListReportModerationMessageRequest struct {
+	ChannelType string `json:"channel_type"`
+	ChannelURL  string `json:"channel_url"`
+	MessageTs   int    `qs:"message_ts"`
+	PrevLimit   int    `qs:"prev_limit"`
+	NextLimit   int    `qs:"next_limit"`
+	UserID      string `qs:"user_id"`
+}
+
+type ListReportModerationMessageResponse struct {
+	Messages []Message `json:"messages"`
+}
+
+func (r ListReportModerationMessageRequest) URL(baseURL string) string {
+	base := fmt.Sprintf("%s/%s/%s/%s/profanity_messages", baseURL, reportEndpoint, r.ChannelType, r.ChannelURL)
+	base, _ = encodeQS[ListReportModerationMessageRequest](base, r)
+	return base
+}
+
+type ListReportModerationMessageSpecific struct{}
+
+type ListReportModerationMessageSpecificRequest struct {
+	ChannelType string `json:"channel_type"`
+	ChannelURL  string `json:"channel_url"`
+	MessageID   string `json:"message_id"`
+}
+
+type ListReportModerationMessageSpecificResponse struct {
+	Message // the documentation doesn't properly state the response
+}
+
+func (r ListReportModerationMessageSpecificRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/%s/%s/%s/profanity_messages/%s", baseURL, r.ChannelType, r.ChannelURL, r.MessageID)
+}
