@@ -2,6 +2,7 @@ package dto
 
 const (
 	userEndpoint              = "users"
+	reportEndpoint            = "report"
 	openChannelEndpoint       = "open_channels"
 	groupChannelEndpoint      = "group_channels"
 	customChannelEndpoint     = "applications/settings_by_channel_custom_type"
