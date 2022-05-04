@@ -2,43 +2,43 @@ package dto
 
 import "fmt"
 
-// http request: GET https://api-{application_id}.sendbird.com/v3/export/{data_type}
-
-type dataExport struct {
+type DataExport struct {
 }
 
-type dataExportRequest struct {
-	dataType string
-	token    string `qs:"token"`
-	limit    int    `qs:"limit"`
+// DataExportRequest is the request payload to export data endpoint
+type DataExportRequest struct {
+	DataType string
+	Token    string `qs:"token"`
+	Limit    int    `qs:"limit"`
 }
 
-type messageResponse struct {
-	exportedData []dataExportResource `json:"exported_data"`
-	next         string               `json:"next"`
+// DataExportResource is the response payload to endpoints in data export
+type DataExportResource struct {
+	StartTs            int      `json:"start_ts"`
+	EndTs              int      `json:"end_ts"`
+	Status             string   `json:"status"`
+	RequestID          string   `json:"request_id"`
+	Format             string   `json:"format"`
+	CSVDelimiter       string   `json:"csv_delimiter"`
+	Timezone           string   `json:"timezone"`
+	CreatedAt          int      `json:"created_at"`
+	ChannelUrls        []string `json:"channel_urls"`
+	ExcludeChannelUrls []string `json:"exclude_channel_urls,omitempty"`
+	File               *ZipFile `json:"file,omitempty"`
+	SenderIds          []string `json:"sender_ids,omitempty"`
+	UserIDs            []string `json:"user_ids,omitempty"`
 }
 
-type dataExportResource struct {
-	startTs            int      `json:"start_ts"`
-	endTs              int      `json:"end_ts"`
-	status             string   `json:"status"`
-	requestID          string   `json:"request_id"`
-	format             string   `json:"format"`
-	csvDelimiter       string   `json:"csv_delimiter"`
-	timezone           string   `json:"timezone"`
-	createdAt          int      `json:"created_at"`
-	channelUrls        []string `json:"channel_urls"`
-	excludeChannelUrls []string `json:"exclude_channel_urls,omitempty"`
-	file               zipFile  `json:"file,omitempty"`
-	senderIds          []string `json:"sender_ids,omitempty"`
-	userIds            []string `json:"user_ids,omitempty"`
+// ZipFile contains a set of preferences to use on making
+type ZipFile struct {
+	Url       string `json:"url"`
+	ExpiresAt int    `json:"expires_at"`
 }
 
-type zipFile struct {
-	url       string `json:"url"`
-	expiresAt int    `json:"expires_at"`
-}
-
-func (d dataExportRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/export/%s", baseURL, d.dataType)
+// URL returns URL string to data export request endpoint
+// GET https://api-{application_id}.sendbird.com/v3/export/{data_type}
+func (d DataExportRequest) URL(baseURL string) string {
+	base := fmt.Sprintf("%s/export/%s", baseURL, d.DataType)
+	s, _ := encodeQS[DataExportRequest](base, d)
+	return s
 }

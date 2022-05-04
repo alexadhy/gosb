@@ -2,32 +2,29 @@ package dto
 
 import "fmt"
 
+type DataExportScheduleRequest struct {
+	DataType                string   `json:"data_type"`
+	StartTs                 int      `json:"start_ts"`
+	EndTs                   int      `json:"end_ts"`
+	Format                  string   `json:"format,"`
+	CSVDelimiter            string   `json:"csv_delimiter,csv"`
+	Timezone                string   `json:"timezone"`
+	SenderIDs               []string `json:"sender_ids"`
+	ExcludeSenderIDs        []string `json:"exclude_sender_ids"`
+	ChannelUrls             []string `json:"channel_urls"`
+	ExclueChannelUrls       []string `json:"exclude_channel_urls"`
+	UserIds                 []string `json:"user_ids"`
+	ShowReadReceipt         bool     `json:"show_read_receipt"`
+	ShowChannelMetada       bool     `json:"show_channel_metadata`
+	NeighboringMessageLimit int      `json:"neighboring_message_limit"`
+}
+
+type DataExportScheduleResponse struct {
+	DataExportResource
+}
+
+// URL returns URL string to export data endpoint
 // POST https://api-{application_id}.sendbird.com/v3/export/{data_type}
-
-type dataExportSchedule struct {
-}
-
-type dataExportScheduleRequest struct {
-	dataType                string   `json:"data_type"`
-	startTs                 int      `json:"start_ts"`
-	endTs                   int      `json:"end_ts"`
-	format                  string   `json:"format,"`
-	csvDelimiter            string   `json:"csv_delimiter,csv"`
-	timezone                string   `json:"timezone"`
-	senderIds               []string `json:"sender_ids"`
-	excludeSenderIds        []string `json:"exclude_sender_ids"`
-	channelUrls             []string `json:"channel_urls"`
-	exclueChannelUrls       []string `json:"exclude_channel_urls"`
-	userIds                 []string `json:"user_ids"`
-	showReadReceipt         bool     `json:"show_read_receipt"`
-	showChannelMetada       bool     `json:"show_channel_metadata`
-	neighboringMessageLimit int      `json:"neighboring_message_limit"`
-}
-
-type dataExportScheduleResponse struct {
-	dataExportResource
-}
-
-func (d dataExportScheduleRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/export/%s")
+func (d DataExportScheduleRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/export/%s", baseURL, d.DataType)
 }
