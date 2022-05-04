@@ -27,7 +27,8 @@ type hasQSTag interface {
 		MessageDeleteMetaRequest |
 		MessageViewReplyRequest |
 		MessageViewThreadInfoRequest |
-		EventSubscriptionListRequest
+		EventSubscriptionListRequest |
+		DataExportRequest
 }
 
 // encodeQS takes baseURL and struct with `qs` tag
