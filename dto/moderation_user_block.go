@@ -2,8 +2,6 @@ package dto
 
 import "fmt"
 
-type ModerationBlockUser struct{}
-
 type ModerationBlockUserRequest struct {
 	UserID string `json:"user_id"`
 	//body
@@ -19,8 +17,6 @@ type ModerationBlockUserResponse struct {
 func (m ModerationBlockUserRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s/block", baseURL, userEndpoint, m.UserID)
 }
-
-type ModerationUnblockUser struct{}
 
 type ModerationUnblockUserRequest struct {
 	UserID   string `json:"user_id"`

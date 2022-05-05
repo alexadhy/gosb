@@ -19,9 +19,7 @@ type DataExportScheduleRequest struct {
 	NeighboringMessageLimit int      `json:"neighboring_message_limit"`
 }
 
-type DataExportScheduleResponse struct {
-	DataExportResource
-}
+type DataExportScheduleResponse DataExportResource
 
 // URL returns URL string to export data endpoint
 // POST https://api-{application_id}.sendbird.com/v3/export/{data_type}

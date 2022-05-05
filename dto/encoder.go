@@ -40,7 +40,12 @@ type hasQSTag interface {
 		ModerationListMutedUserInGroupChannelRequest |
 		ModerationListMutedUsersInOpenChannelRequest |
 		ModerationListMutedUsersInGroupChannelRequest |
-		ModerationListMutedUsersInCustomChannelRequest
+		ModerationListMutedUsersInCustomChannelRequest |
+		ModerationListBannedUsersRequest |
+		ModerationListBannedUsersInOpenChannelRequest |
+		ModerationListBannedUsersInGroupChannelRequest |
+		ModerationListBannedUsersInCustomChannelRequest |
+		ModerationUnbanUserFromCustomChannelRequest
 }
 
 // encodeQS takes baseURL and struct with `qs` tag

@@ -2,8 +2,6 @@ package dto
 
 import "fmt"
 
-type ModerationListUsersMutedChannels struct{}
-
 type ModerationListUsersMutedChannelsRequest struct {
 	UserID string `json:"user_id"`
 	// optional
@@ -21,8 +19,6 @@ func (m ModerationListUsersMutedChannelsRequest) URL(baseURL string) string {
 	base, _ = encodeQS[ModerationListUsersMutedChannelsRequest](base, m)
 	return base
 }
-
-type ModerationListMutedUsersInOpenChannel struct{}
 
 type ModerationListMutedUsersInOpenChannelRequest struct {
 	ChannelURL string `json:"channel_url"`
@@ -66,8 +62,6 @@ func (m ModerationListMutedUsersInGroupChannelRequest) URL(baseURL string) strin
 	return base
 }
 
-type ModerationListMutedUsersInCustomChannel struct{}
-
 type ModerationListMutedUsersInCustomChannelRequest struct {
 	CustomType string `json:"custom_type"`
 	// optional
@@ -104,8 +98,6 @@ type ModerationListMutedUserInGroupChannelResponse struct {
 func (m ModerationListMutedUserInGroupChannelRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s/mute/%s", baseURL, groupChannelEndpoint, m.ChannelURL, m.MutedUrlId)
 }
-
-type ModerationListMutedUserInOpenChannel struct{}
 
 type ModerationListMutedUserInOpenChannelRequest struct {
 	ChannelURL string `json:"channel_url"`

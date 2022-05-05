@@ -2,8 +2,6 @@ package dto
 
 import "fmt"
 
-type ReportUser struct{}
-
 type ReportUserRequest struct {
 	OffendingUserID string `json:"offending_user_id"`
 	// body contents
@@ -21,8 +19,6 @@ type ReportUserResponse struct {
 func (r ReportUserRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/users/%s", baseURL, reportEndpoint, r.OffendingUserID)
 }
-
-type ReportChannel struct{}
 
 type ReportChannelRequest struct {
 	ChannelType string `json:"channel_type"`

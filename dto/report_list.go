@@ -2,9 +2,6 @@ package dto
 
 import "fmt"
 
-type Report struct {
-}
-
 type ReportResource struct {
 	ReportingUser     UserResponse `json:"reporting_user"`
 	ReportType        string       `json:"report_type"`
@@ -51,8 +48,6 @@ func (r ListReportUserRequest) URL(baseURL string) string {
 	return s
 }
 
-type listReportChannel struct{}
-
 type ListReportChannelRequest struct {
 	ChannelType string `json:"channel_type"`
 	ChannelURL  string `json:"channel_url"`
@@ -70,8 +65,6 @@ func (r ListReportChannelRequest) URL(baseURL string) string {
 	base, _ = encodeQS[ListReportChannelRequest](base, r)
 	return base
 }
-
-type ListReportMessage struct{}
 
 type ListReportMessageRequest struct {
 	ChannelType string `json:"channel_type"`
@@ -91,8 +84,6 @@ func (r ListReportMessageRequest) URL(baseURL string) string {
 	base, _ = encodeQS[ListReportMessageRequest](base, r)
 	return base
 }
-
-type ModeratedMessage struct{}
 
 type ListReportModerationMessage struct{}
 
@@ -114,8 +105,6 @@ func (r ListReportModerationMessageRequest) URL(baseURL string) string {
 	base, _ = encodeQS[ListReportModerationMessageRequest](base, r)
 	return base
 }
-
-type ListReportModerationMessageSpecific struct{}
 
 type ListReportModerationMessageSpecificRequest struct {
 	ChannelType string `json:"channel_type"`

@@ -2,8 +2,6 @@ package dto
 
 import "fmt"
 
-type ModerationListBlockedUsers struct{}
-
 type ModerationListBlockedUsersRequest struct {
 	UserID string `json:"user_id"`
 	//optional
