@@ -283,6 +283,21 @@ func (o GroupChannelHideRequest) URL(baseURL string) string {
 // GroupChannelHideResponse is the response payload to hide group channel endpoint
 type GroupChannelHideResponse GroupChannelResponse
 
+// GroupChannelUnhideRequest is the request params & url query values for unhiding group channel
+type GroupChannelUnhideRequest struct {
+	UserID          string `qs:"user_id"`
+	ChannelURL      string `qs:"-"`
+	ShouldUnhideAll *bool  `qs:"should_unhide_all,omitempty"`
+}
+
+// URL returns URL string to group channel unhide endpoint
+// DELETE https://api-{application_id}.sendbird.com/v3/group_channels/{channel_url}/hide
+func (o GroupChannelUnhideRequest) URL(baseURL string) string {
+	base := fmt.Sprintf("%s/%s/%s/hide", baseURL, groupChannelEndpoint, o.ChannelURL)
+	s, _ := encodeQS[GroupChannelUnhideRequest](base, o)
+	return s
+}
+
 // GroupChannelResetHistoryRequest is the payload to group_channel reset history endpoint
 type GroupChannelResetHistoryRequest struct {
 	ChannelURL string `json:"-"`

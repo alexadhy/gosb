@@ -14,6 +14,7 @@ type hasQSTag interface {
 		OpenChannelListOperatorsRequest |
 		OpenChannelListParticipantsRequest |
 		OpenChannelUnregisterOperatorRequest |
+		GroupChannelUnhideRequest |
 		GroupChannelListRequest |
 		GroupChannelListOperatorsRequest |
 		GroupChannelListMembersRequest |
