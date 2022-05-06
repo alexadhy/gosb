@@ -30,7 +30,7 @@ type UserResponse struct {
 	PushEnabled               *bool     `json:"push_enabled,omitempty"`
 	PushTriggerOption         *string   `json:"push_trigger_option,omitempty"`
 	DoNotDisturb              *bool     `json:"do_not_disturb,omitempty"`
-	Error                     Error     `json:"error,omitempty"`
+	Error                     *Error    `json:"error,omitempty"`
 }
 
 // UserGetRequest is the request payload to user GET endpoint
@@ -91,6 +91,10 @@ type UserCreateRequest struct {
 	IssueAccessToken *bool     `json:"issue_access_token" default:"false"`
 	DiscoveryKeys    []string  `json:"discovery_keys"`
 	Metadata         *Metadata `json:"metadata,omitempty"`
+}
+
+func (u UserCreateRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/%s", baseURL, userEndpoint)
 }
 
 // UserUpdateRequest is the request payload to update user endpoint

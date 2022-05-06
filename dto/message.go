@@ -186,17 +186,17 @@ type MessageListResponse struct {
 // MessageGetRequest is the request parameter & url values to get message endpoint
 type MessageGetRequest struct {
 	CommonMessageRequest
-	MessageID                string `qs:"-"`
-	IncludeParentMessageInfo *bool  `qs:"include_parent_message_info,omitempty"`
-	IncludeThreadInfo        *bool  `qs:"include_thread_info,omitempty"`
-	IncludeReactions         *bool  `qs:"include_reactions,omitempty"`
-	WithSortedMetaArray      *bool  `qs:"with_sorted_meta_array,omitempty"`
+	MessageID                int64 `qs:"-"`
+	IncludeParentMessageInfo *bool `qs:"include_parent_message_info,omitempty"`
+	IncludeThreadInfo        *bool `qs:"include_thread_info,omitempty"`
+	IncludeReactions         *bool `qs:"include_reactions,omitempty"`
+	WithSortedMetaArray      *bool `qs:"with_sorted_meta_array,omitempty"`
 }
 
 // URL returns URL string for get message endpoint
 // GET https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}
 func (m MessageGetRequest) URL(baseURL string) string {
-	base := fmt.Sprintf("%s/%s/%s/%s/%s", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
+	base := fmt.Sprintf("%s/%s/%s/%s/%d", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
 	s, err := encodeQS[MessageGetRequest](base, m)
 	if err != nil {
 		return ""
@@ -368,7 +368,7 @@ type MessageSentResponse Message
 type MessageUpdateRequest struct {
 	ChannelType      ChannelType `json:"-" qs:"-"`
 	ChannelURL       string      `json:"-" qs:"-"`
-	MessageID        string      `json:"-" qs:"-"`
+	MessageID        int64       `json:"-" qs:"-"`
 	MessageType      string      `json:"message_type"`
 	Message          *string     `json:"message,omitempty"`
 	CustomType       *string     `json:"custom_type,omitempty"`
@@ -380,7 +380,7 @@ type MessageUpdateRequest struct {
 // URL returns URL string for update message endpoint
 // PUT https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}
 func (m MessageUpdateRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/%s/%s/%s/%s", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
+	return fmt.Sprintf("%s/%s/%s/%s/%d", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
 }
 
 // MessageUpdateResponse is the response type to MessageUpdateRequest
@@ -390,13 +390,13 @@ type MessageUpdateResponse Message
 type MessageDeleteRequest struct {
 	ChannelType ChannelType `json:"-" qs:"-"`
 	ChannelURL  string      `json:"-" qs:"-"`
-	MessageID   string      `json:"-" qs:"-"`
+	MessageID   int64       `json:"-" qs:"-"`
 }
 
 // URL returns URL string for delete message endpoint
 // DELETE https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}
 func (m MessageDeleteRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/%s/%s/%s/%s", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
+	return fmt.Sprintf("%s/%s/%s/%s/%d", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
 }
 
 // MessageDeleteResponse is the response type to MessageDeleteRequest
@@ -406,14 +406,14 @@ type MessageDeleteResponse Message
 type MessageAddMetaRequest struct {
 	ChannelType     ChannelType  `json:"-" qs:"-"`
 	ChannelURL      string       `json:"-" qs:"-"`
-	MessageID       string       `json:"-" qs:"-"`
+	MessageID       int64        `json:"-" qs:"-"`
 	SortedMetaArray []SortedMeta `json:"sorted_metaarray"`
 }
 
 // URL returns URL string to add metadata to message
 // POST https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}/sorted_metaarray
 func (m MessageAddMetaRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/%s/%s/%s/%s/sorted_metaarray", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
+	return fmt.Sprintf("%s/%s/%s/%s/%d/sorted_metaarray", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
 }
 
 // MessageAddMetaResponse is an alias to SortedMetaArrayResponse
@@ -423,7 +423,7 @@ type MessageAddMetaResponse SortedMetaArrayResponse
 type MessageUpdateMetaRequest struct {
 	ChannelType     ChannelType  `json:"-" qs:"-"`
 	ChannelURL      string       `json:"-" qs:"-"`
-	MessageID       string       `json:"-" qs:"-"`
+	MessageID       int64        `json:"-" qs:"-"`
 	SortedMetaArray []SortedMeta `json:"sorted_metaarray"`
 	Mode            *string      `json:"mode,omitempty"`
 	Upsert          *bool        `json:"upsert,omitempty"`
@@ -432,7 +432,7 @@ type MessageUpdateMetaRequest struct {
 // URL returns URL string to update metadata to message
 // PUT https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}/sorted_metaarray
 func (m MessageUpdateMetaRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/%s/%s/%s/%s/sorted_metaarray", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
+	return fmt.Sprintf("%s/%s/%s/%s/%d/sorted_metaarray", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
 }
 
 // MessageUpdateMetaResponse is an alias to SortedMetaArrayResponse
@@ -442,14 +442,14 @@ type MessageUpdateMetaResponse SortedMetaArrayResponse
 type MessageDeleteMetaRequest struct {
 	ChannelType ChannelType `json:"-" qs:"-"`
 	ChannelURL  string      `json:"-" qs:"-"`
-	MessageID   string      `json:"-" qs:"-"`
+	MessageID   int64       `json:"-" qs:"-"`
 	Keys        []string    `qs:"keys,comma"`
 }
 
 // URL returns URL string to update metadata to message
 // DELETE https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}/sorted_metaarray
 func (m MessageDeleteMetaRequest) URL(baseURL string) string {
-	base := fmt.Sprintf("%s/%s/%s/%s/%s/sorted_metaarray", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
+	base := fmt.Sprintf("%s/%s/%s/%s/%d/sorted_metaarray", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
 	s, _ := encodeQS[MessageDeleteMetaRequest](base, m)
 	return s
 }
@@ -479,7 +479,7 @@ type MessageTotalCountInChannelResponse struct {
 type MessageListThreadedRepliesRequest struct {
 	ChannelType              ChannelType     `json:"-" qs:"-"`
 	ChannelURL               string          `json:"-" qs:"-"`
-	ParentMessageID          string          `json:"-" qs:"parent_message_id"`
+	ParentMessageID          int64           `json:"-" qs:"parent_message_id"`
 	MessageTS                int64           `qs:"message_ts"`
 	IncludeReplyType         *string         `qs:"include_reply_type,omitempty"`
 	IncludeParentMessageInfo *bool           `qs:"include_parent_message_info,omitempty"`
@@ -513,7 +513,7 @@ type MessageListThreadedRepliesResponse MessageListResponse
 type MessageViewReplyRequest struct {
 	ChannelType              ChannelType `json:"-" qs:"-"`
 	ChannelURL               string      `json:"-" qs:"-"`
-	MessageID                string      `json:"-" qs:"message_id"`
+	MessageID                int64       `json:"-" qs:"message_id"`
 	IncludeReplyType         *string     `qs:"include_reply_type,omitempty"`
 	IncludeParentMessageInfo *bool       `qs:"include_parent_message_info,omitempty"`
 	IncludeThreadInfo        *bool       `qs:"include_thread_info,omitempty"`
@@ -522,7 +522,7 @@ type MessageViewReplyRequest struct {
 // URL returns URL string to view specific reply to a message endpoint.
 // GET https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}
 func (m MessageViewReplyRequest) URL(baseURL string) string {
-	base := fmt.Sprintf("%s/%s/%s/%s/%s", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
+	base := fmt.Sprintf("%s/%s/%s/%s/%d", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
 	s, _ := encodeQS[MessageViewReplyRequest](base, m)
 	return s
 }
@@ -534,7 +534,7 @@ type MessageViewReplyResponse Message
 type MessageViewThreadInfoRequest struct {
 	ChannelType     ChannelType `json:"-" qs:"-"`
 	ChannelURL      string      `json:"-" qs:"-"`
-	ParentMessageID string      `json:"-" qs:"parent_message_id"`
+	ParentMessageID int64       `json:"-" qs:"parent_message_id"`
 }
 
 // URL returns URL string to be used for MessageViewThreadInfo endpoint
@@ -614,9 +614,118 @@ type MessageDeleteReplyRequest struct {
 // URL returns URL string to message delete reply endpoint
 // DELETE https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}
 func (m MessageDeleteReplyRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/%s/%s/%s/%s", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
+	return fmt.Sprintf("%s/%s/%s/%s/%d", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
 }
 
-// MessageSearchRequest is the
+// MessageSearchRequest is the message search URL params & query values
 type MessageSearchRequest struct {
+	ChannelURL            string   `json:"-" qs:"channel_url"`
+	UserID                string   `qs:"user_id"`
+	Query                 string   `qs:"query"`
+	CustomType            *string  `qs:"custom_type,omitempty"`
+	Limit                 *int     `qs:"limit,omitempty"`
+	ExactMatch            *bool    `qs:"exact_match,omitempty"`
+	AdvancedQuery         *bool    `qs:"advanced_query,omitempty"`
+	Synonym               *bool    `qs:"synonym,omitempty"`
+	SortField             *string  `qs:"sort_field,omitempty"`
+	Score                 *bool    `qs:"score,omitempty"`
+	MessageTSFrom         *int64   `qs:"message_ts_from,omitempty"`
+	MessageTSTo           *int64   `qs:"message_ts_to,omitempty"`
+	After                 *string  `qs:"after,omitempty"`
+	Before                *string  `qs:"before,omitempty"`
+	Reverse               *bool    `qs:"reverse,omitempty"`
+	Token                 *string  `qs:"token,omitempty"`
+	TargetUserIDs         []string `qs:"target_user_ids,comma,omitempty"`
+	WithChannelInResponse *bool    `qs:"with_channel_in_response,omitempty"`
 }
+
+// MessageSearchResponse is the response payload to search request endpoint
+type MessageSearchResponse struct {
+	TotalCount    *int      `json:"total_count,omitempty"`
+	Results       []Message `json:"results,omitempty"`
+	StartCursor   *string   `json:"start_cursor,omitempty"`
+	EndCursor     *string   `json:"end_cursor,omitempty"`
+	HasPrev       *bool     `json:"has_prev,omitempty"`
+	HasNext       *bool     `json:"has_next,omitempty"`
+	NextPageToken string    `json:"next,omitempty"`
+	Error         *Error    `json:"error,omitempty"`
+}
+
+// URL returns URL string for SendBird's search message endpoint
+// GET https://api-{application_id}.sendbird.com/v3/search/messages
+func (m MessageSearchRequest) URL(baseURL string) string {
+	base := fmt.Sprintf("%s/search/%s", baseURL, msgEndpoint)
+	s, _ := encodeQS[MessageSearchRequest](base, m)
+	return s
+}
+
+// MessageMigrateRequest is the request type to migrate messages to other channel
+type MessageMigrateRequest struct {
+	TargetChannelURL string    `json:"-"`
+	Messages         []Message `json:"messages"`
+	UpdateReadTS     bool      `json:"update_read_ts"`
+	RewindReadTS     *bool     `json:"rewind_read_ts,omitempty"`
+}
+
+// MessageMigrateResponse will return empty body and/or Error if any
+type MessageMigrateResponse EmptyResponse
+
+// URL returns URL string for SendBird's migrate messages endpoint
+// POST https://api-{application_id}.sendbird.com/v3/migration/{target_channel_url}
+func (m MessageMigrateRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/migration/%s", baseURL, m.TargetChannelURL)
+}
+
+// MessageMarkAllAsDeliveredRequest mark all as delivered request payload
+type MessageMarkAllAsDeliveredRequest struct {
+	ChannelURL string `json:"-"`
+	UserID     string `json:"user_id"`
+}
+
+// URL for MessageMarkAllAsDeliveredRequest request endpoint
+// PUT https://api-{application_id}.sendbird.com/v3/group_channels/{channel_url}/messages/mark_as_delivered
+func (m MessageMarkAllAsDeliveredRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/%s/%s/%s/mark_as_delivered", baseURL, groupChannelEndpoint, m.ChannelURL, msgEndpoint)
+}
+
+// MessageMarkAllAsDeliveredResponse is the response type to mark all as delivered request endpoint.
+type MessageMarkAllAsDeliveredResponse struct {
+	TS    *int64 `json:"ts,omitempty"`
+	Error *Error `json:"error,omitempty"`
+}
+
+// MessageViewUnreadCountRequest is the request parameters
+type MessageViewUnreadCountRequest struct {
+	ChannelURL string   `qs:"-"`
+	UserIDs    []string `qs:"user_ids,comma,omitempty"`
+}
+
+// URL returns URL string for message view unread count request endpoint.
+// GET https://api-{application_id}.sendbird.com/v3/group_channels/{channel_url}/messages/unread_count
+func (m MessageViewUnreadCountRequest) URL(baseURL string) string {
+	base := fmt.Sprintf("%s/%s/%s/%s/unread_count", baseURL, groupChannelEndpoint, m.ChannelURL, msgEndpoint)
+	s, _ := encodeQS[MessageViewUnreadCountRequest](base, m)
+	return s
+}
+
+// MessageViewUnreadCountResponse is the response type / payload to message view unread count URL
+type MessageViewUnreadCountResponse struct {
+	Unread map[string]any `json:"unread,omitempty"`
+	Error  *Error         `json:"error,omitempty"`
+}
+
+// MessageTranslateRequest is the request payload to send to translate message endpoint
+type MessageTranslateRequest struct {
+	CommonMessageRequest
+	MessageID   int64    `json:"-"`
+	TargetLangs []string `json:"target_langs"`
+}
+
+// URL returns URL string for message translation request endpo.nt.
+// POST https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}/translation
+func (m MessageTranslateRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/%s/%s/%s/%d/translation", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
+}
+
+// MessageTranslateResponse is an alias for Message
+type MessageTranslateResponse Message

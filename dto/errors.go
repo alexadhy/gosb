@@ -4,22 +4,27 @@ import "encoding/json"
 
 // Error is the json response type returned by SendBird API
 type Error struct {
-	HasError  bool      `json:"error,omitempty"`
-	Code      int       `json:"code,omitempty"`
-	ErrorCode ErrorCode `json:"-"`
-	Message   string    `json:"message,omitempty"`
+	Code    ErrorCode `json:"code,omitempty"`
+	Message string    `json:"message,omitempty"`
 }
 
-func New(b []byte) *Error {
+func (e Error) Error() string {
+	return e.Message
+}
+
+func NewErrFromJSON(b []byte) *Error {
 	var e Error
 	if err := json.Unmarshal(b, &e); err != nil {
 		return &Error{
-			HasError:  true,
-			ErrorCode: ErrUnmarshalJSONResponse,
-			Message:   err.Error(),
+			Code:    ErrUnmarshalJSONResponse,
+			Message: err.Error(),
 		}
 	}
 	return &e
+}
+
+func NewErr(code ErrorCode, msg string) *Error {
+	return &Error{Message: msg, Code: code}
 }
 
 // ErrorCode maps error code from
@@ -27,6 +32,7 @@ type ErrorCode int
 
 const (
 	ErrUnmarshalJSONResponse = ErrorCode(iota + 900000)
+	ErrEmptyURLValue
 	ErrParamShouldTypeString = ErrorCode(iota + 400100)
 	ErrParamShouldTypeNumber
 	ErrParamShouldTypeList

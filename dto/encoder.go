@@ -25,9 +25,16 @@ type hasQSTag interface {
 		MessageListThreadedRepliesRequest |
 		MessageGetRequest |
 		MessageDeleteMetaRequest |
+		MessageSearchRequest |
 		MessageViewReplyRequest |
 		MessageViewThreadInfoRequest |
+		MessageViewUnreadCountRequest |
+		EmojiListReactionsRequest |
+		EmojiDeleteReactionRequest |
 		EventSubscriptionListRequest |
+		AnnouncementListRequest |
+		AnnouncementGroupListRequest |
+		AnnouncementViewStatisticsRequest |
 		DataExportRequest
 }
 

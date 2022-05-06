@@ -80,6 +80,7 @@ type OpenChannelResponse struct {
 	Data             *string        `json:"data,omitempty"`
 	Operators        []UserResponse `json:"operators,omitempty"`
 	Freeze           *bool          `json:"freeze,omitempty"`
+	Error            *Error         `json:"error,omitempty"`
 }
 
 // OpenChannelListRequest is the url query values for List open channels endpoint

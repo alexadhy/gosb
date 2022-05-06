@@ -2,9 +2,6 @@ package dto
 
 import "fmt"
 
-type DataExport struct {
-}
-
 // DataExportRequest is the request payload to export data endpoint
 type DataExportRequest struct {
 	DataType string

@@ -90,6 +90,7 @@ type GroupChannelResponse struct {
 	LastMessage          Message        `json:"last_message"`
 	CreatedAt            *int64         `json:"created_at,omitempty"`
 	Freeze               *bool          `json:"freeze,omitempty"`
+	Error                *Error         `json:"error,omitempty"`
 }
 
 // GroupChannelListRequest is the url query values for List group channels endpoint

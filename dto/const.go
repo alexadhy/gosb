@@ -8,6 +8,7 @@ const (
 	defaultInvitationEndpoint = "applications/default_channel_invitation_preference"
 	settingsEndpoint          = "applications/settings"
 	msgEndpoint               = "messages"
+	announcementEndpoint      = "announcements"
 )
 
 // Order is the order url query value
@@ -144,4 +145,14 @@ const (
 	MODERATION_ACTION_MUTE = ModerationAction("mute")
 	MODERATION_ACTION_KICK = ModerationAction("kick")
 	MODERATION_ACTION_BAN  = ModerationAction("ban")
+)
+
+// AnnouncementAction is the actions that can be taken to modify announcement status
+type AnnouncementAction string
+
+const (
+	ANNOUNCEMENT_ACTION_PAUSE  = AnnouncementAction("pause")
+	ANNOUNCEMENT_ACTION_STOP   = AnnouncementAction("stop")
+	ANNOUNCEMENT_ACTION_RESUME = AnnouncementAction("resume")
+	ANNOUNCEMENT_ACTION_CANCEL = AnnouncementAction("cancel")
 )
