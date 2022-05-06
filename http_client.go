@@ -14,8 +14,10 @@ func defaultHC(apiToken string, opts ...resty.Option) *resty.Client {
 	options := &resty.Options{}
 	c := resty.New()
 
-	for _, opt := range opts {
-		opt(options)
+	if opts != nil && len(opts) > 0 {
+		for _, opt := range opts {
+			opt(options)
+		}
 	}
 	c.SetRetryCount(3)
 
@@ -23,11 +25,7 @@ func defaultHC(apiToken string, opts ...resty.Option) *resty.Client {
 	return c
 }
 
-type urler interface {
-	URL(string) string
-}
-
-func makeRequestURL(input urler, c *Client) (string, error) {
+func makeRequestURL(input dto.URLer, c *Client) (string, error) {
 	u := input.URL(c.baseURL)
 	if u == "" {
 		return "", dto.NewErr(dto.ErrEmptyURLValue, "empty request URL")
@@ -50,30 +48,50 @@ func makeRequest[T any](ctx context.Context, hc *resty.Client, fn func(request *
 	return result, nil
 }
 
-func getRequest[T any](ctx context.Context, hc *resty.Client, u string) (*T, error) {
-	return makeRequest[T](ctx, hc, func(request *resty.Request) (*resty.Response, error) {
+func getRequest[T any](ctx context.Context, c *Client, input dto.URLer) (*T, error) {
+	u, err := makeRequestURL(input, c)
+	if err != nil {
+		return nil, err
+	}
+
+	return makeRequest[T](ctx, c.hc, func(request *resty.Request) (*resty.Response, error) {
 		return request.Get(u)
 	})
 }
 
-func postRequest[T any](ctx context.Context, hc *resty.Client, u string, body any) (*T, error) {
-	return makeRequest[T](ctx, hc, func(request *resty.Request) (*resty.Response, error) {
+func postRequest[T any](ctx context.Context, c *Client, input dto.URLer) (*T, error) {
+	u, err := makeRequestURL(input, c)
+	if err != nil {
+		return nil, err
+	}
+
+	return makeRequest[T](ctx, c.hc, func(request *resty.Request) (*resty.Response, error) {
 		return request.
-			SetBody(body).
+			SetBody(input).
 			Post(u)
 	})
 }
 
-func putRequest[T any](ctx context.Context, hc *resty.Client, u string, body any) (*T, error) {
-	return makeRequest[T](ctx, hc, func(request *resty.Request) (*resty.Response, error) {
+func putRequest[T any](ctx context.Context, c *Client, input dto.URLer) (*T, error) {
+	u, err := makeRequestURL(input, c)
+	if err != nil {
+		return nil, err
+	}
+
+	return makeRequest[T](ctx, c.hc, func(request *resty.Request) (*resty.Response, error) {
 		return request.
-			SetBody(body).
+			SetBody(input).
 			Put(u)
 	})
 }
 
-func deleteRequest[T any](ctx context.Context, hc *resty.Client, u string) (*T, error) {
-	return makeRequest[T](ctx, hc, func(request *resty.Request) (*resty.Response, error) {
+func deleteRequest[T any](ctx context.Context, c *Client, input dto.URLer) (*T, error) {
+	u, err := makeRequestURL(input, c)
+	if err != nil {
+		return nil, err
+	}
+
+	return makeRequest[T](ctx, c.hc, func(request *resty.Request) (*resty.Response, error) {
 		return request.Delete(u)
 	})
 }

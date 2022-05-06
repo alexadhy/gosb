@@ -8,7 +8,7 @@ type ReportResource struct {
 	ReportCategory    string       `json:"report_category"`
 	ReportedMessage   TextMessage  `json:"reported_message"` // guessing this will be a text message
 	OffendingUser     UserResponse `json:"offending_user"`
-	Channel           interface{}  `json:"channel"` // can be open or group channel, how do i handle it? generics?
+	Channel           Channel      `json:"channel"` // can be open or group channel, how do i handle it? generics? (Channel)
 	ReportDescription string       `json:"report_description"`
 	CreatedAt         int          `json:"created_at"`
 }
@@ -55,7 +55,7 @@ type ListReportChannelRequest struct {
 	Limit       int    `qs:"limit"`
 }
 
-type listReportChannelResponse struct {
+type ListReportChannelResponse struct {
 	ReportLogs []ReportResource `json:"report_logs"`
 	Next       string           `json:"next"`
 }
@@ -69,7 +69,7 @@ func (r ListReportChannelRequest) URL(baseURL string) string {
 type ListReportMessageRequest struct {
 	ChannelType string `json:"channel_type"`
 	ChannelURL  string `json:"channel_url"`
-	MessageID   string `json:"message_id:`
+	MessageID   string `json:"message_id"`
 	Token       string `qs:"token"`
 	Limit       int    `qs:"limit"`
 }
@@ -109,7 +109,7 @@ func (r ListReportModerationMessageRequest) URL(baseURL string) string {
 type ListReportModerationMessageSpecificRequest struct {
 	ChannelType string `json:"channel_type"`
 	ChannelURL  string `json:"channel_url"`
-	MessageID   string `json:"message_id"`
+	MessageID   int64  `json:"message_id"`
 }
 
 type ListReportModerationMessageSpecificResponse struct {
@@ -117,5 +117,5 @@ type ListReportModerationMessageSpecificResponse struct {
 }
 
 func (r ListReportModerationMessageSpecificRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/%s/%s/%s/profanity_messages/%s", baseURL, r.ChannelType, r.ChannelURL, r.MessageID)
+	return fmt.Sprintf("%s/%s/%s/%s/profanity_messages/%d", baseURL, reportEndpoint, r.ChannelType, r.ChannelURL, r.MessageID)
 }

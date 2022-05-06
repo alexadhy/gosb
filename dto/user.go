@@ -239,3 +239,12 @@ func (u UserLeaveAllGroupChannelRequest) URL(baseURL string) string {
 		u.UserID,
 	)
 }
+
+// UserGetUnreadItemsRequest is the request type to
+// retrieve a set of total number of a user's unread messages, unread mentioned messages,
+// or received invitations in either Supergroup channels or non-Supergroup channels.
+type UserGetUnreadItemsRequest struct {
+	UserID     string   `qs:"-"`
+	CustomType *string  `qs:"custom_type,omitempty"`
+	ItemKeys   []string `qs:"item_keys,comma,omitempty"`
+}

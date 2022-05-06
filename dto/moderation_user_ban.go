@@ -46,7 +46,7 @@ type ModerationBanUserFromCustomChannelResponse struct{}
 // URL returns the url to ban a user from channels with the specified custom channel types
 // POST https://api-{application_id}.sendbird.com/v3/users/{user_id}/banned_channel_custom_types
 func (m ModerationBanUserFromCustomChannelRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/%s/%s/banned_channel_custom_types")
+	return fmt.Sprintf("%s/%s/%s/banned_channel_custom_types", baseURL, userEndpoint, m.UserID)
 }
 
 type ModerationBanUsersFromCustomChannelRequest struct {
@@ -84,7 +84,7 @@ type ModerationUpdateBannedUserStatusInOpenChannelResponse ModerationBanUserFrom
 // URL returns the url to update the information about a banned user of an open channel
 // PUT https://api-{application_id}.sendbird.com/v3/open_channels/{channel_url}/ban/{banned_user_id}
 func (m ModerationUpdateBannedUserStatusInOpenChannelRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/%s/ban/%s", baseURL, openChannelEndpoint, m.ChannelURL, m.BannedUserID)
+	return fmt.Sprintf("%s/%s/%s/ban/%s", baseURL, openChannelEndpoint, m.ChannelURL, m.BannedUserID)
 }
 
 type ModerationUpdateBannedUserStatusInGroupChannelRequest ModerationUpdateBannedUserStatusInOpenChannelRequest

@@ -31,7 +31,7 @@ type Client struct {
 func NewClient(cfg Config) *Client {
 	return &Client{
 		appID:   cfg.ApplicationID,
-		hc:      defaultHC(cfg.APIToken, nil),
+		hc:      defaultHC(cfg.APIToken),
 		baseURL: cfg.baseURL(),
 	}
 }

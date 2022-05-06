@@ -6,61 +6,14 @@ import (
 	"github.com/sonh/qs"
 )
 
-type hasQSTag interface {
-	UserListRequest |
-		UserGetRequest |
-		UserListGroupChannelRequest |
-		OpenChannelListRequest |
-		OpenChannelListOperatorsRequest |
-		OpenChannelListParticipantsRequest |
-		OpenChannelUnregisterOperatorRequest |
-		GroupChannelUnhideRequest |
-		GroupChannelListRequest |
-		GroupChannelListOperatorsRequest |
-		GroupChannelListMembersRequest |
-		GroupChannelUnregisterOperatorRequest |
-		CustomChannelListSettingsRequest |
-		CustomChannelListOperatorsRequest |
-		CustomChannelUnregisterOperatorRequest |
-		MessageListRequest |
-		MessageListThreadedRepliesRequest |
-		MessageGetRequest |
-		MessageDeleteMetaRequest |
-		MessageSearchRequest |
-		MessageViewReplyRequest |
-		MessageViewThreadInfoRequest |
-		MessageViewUnreadCountRequest |
-		EmojiListReactionsRequest |
-		EmojiDeleteReactionRequest |
-		EventSubscriptionListRequest |
-		AnnouncementListRequest |
-		AnnouncementGroupListRequest |
-		AnnouncementViewStatisticsRequest |
-		DataExportRequest |
-		DataExportRequest |
-		ListReportRequest |
-		ListReportUserRequest |
-		ListReportChannelRequest |
-		ListReportMessageRequest |
-		ListReportModerationMessageRequest |
-		ModerationListBlockedUsersRequest |
-		ModerationListUsersMutedChannelsRequest |
-		ModerationListMutedUserInOpenChannelRequest |
-		ModerationListMutedUserInGroupChannelRequest |
-		ModerationListMutedUsersInOpenChannelRequest |
-		ModerationListMutedUsersInGroupChannelRequest |
-		ModerationListMutedUsersInCustomChannelRequest |
-		ModerationListBannedUsersRequest |
-		ModerationListBannedUsersInOpenChannelRequest |
-		ModerationListBannedUsersInGroupChannelRequest |
-		ModerationListBannedUsersInCustomChannelRequest |
-		ModerationUnbanUserFromCustomChannelRequest
+type URLer interface {
+	URL(string) string
 }
 
 // encodeQS takes baseURL and struct with `qs` tag
 // encodes struct with qs tag to URL string
 // will return the encoded url string and error if any
-func encodeQS[T hasQSTag](baseURL string, input T) (string, error) {
+func encodeQS[T URLer](baseURL string, input T) (string, error) {
 	_, err := url.Parse(baseURL)
 	if err != nil {
 		return "", err
@@ -72,5 +25,5 @@ func encodeQS[T hasQSTag](baseURL string, input T) (string, error) {
 		return "", err
 	}
 
-	return baseURL + values.Encode(), nil
+	return baseURL + "?" + values.Encode(), nil
 }

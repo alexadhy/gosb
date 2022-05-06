@@ -344,6 +344,7 @@ type FileMessageSendRequest struct {
 
 // AdminMessageSendRequest is the request payload for message send request with type ADMM
 type AdminMessageSendRequest struct {
+	CommonMessageSendRequest
 	Message    *string `json:"message,omitempty"`
 	CustomType *string `json:"custom_type,omitempty"`
 	IsSilent   *bool   `json:"is_silent,omitempty"`
@@ -358,7 +359,25 @@ type AppleCriticalAlertOptions struct {
 // URL creates URL string to send message endpoint
 // POST https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages
 func (m MessageSendRequest) URL(baseURL string) string {
-	return fmt.Sprintf("%s/%s/%s/%s", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint)
+	var chanType string
+	var chanURL string
+	if m.TextMessageSendRequest != nil {
+		chanType = string(m.TextMessageSendRequest.ChannelType)
+		chanURL = m.TextMessageSendRequest.ChannelURL
+	}
+	if m.FileMessageSendRequest != nil {
+		chanType = string(m.FileMessageSendRequest.ChannelType)
+		chanURL = m.FileMessageSendRequest.ChannelURL
+	}
+	if m.FileMessageSendMultipartRequest != nil {
+		chanType = string(m.FileMessageSendMultipartRequest.ChannelType)
+		chanURL = m.FileMessageSendMultipartRequest.ChannelURL
+	}
+	if m.AdminMessageSendRequest != nil {
+		chanType = string(m.AdminMessageSendRequest.ChannelType)
+		chanURL = m.AdminMessageSendRequest.ChannelURL
+	}
+	return fmt.Sprintf("%s/%s/%s/%s", baseURL, chanType, chanURL, msgEndpoint)
 }
 
 // MessageSentResponse is the response type to MessageSendRequest request

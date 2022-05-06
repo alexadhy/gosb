@@ -11,12 +11,8 @@ func (c *Client) OpenChannelListOperators(
 	ctx context.Context,
 	input *dto.OpenChannelListOperatorsRequest,
 ) (*dto.OpenChannelListOperatorsResponse, error) {
-	u, err := makeRequestURL(input, c)
-	if err != nil {
-		return nil, err
-	}
 
-	result, err := getRequest[dto.OpenChannelListOperatorsResponse](ctx, c.hc, u)
+	result, err := getRequest[dto.OpenChannelListOperatorsResponse](ctx, c, input)
 	if err != nil {
 		return nil, err
 	}
@@ -29,12 +25,8 @@ func (c *Client) OpenChannelRegisterOperators(
 	ctx context.Context,
 	input *dto.OpenChannelRegisterOperatorRequest,
 ) (*dto.OpenChannelResponse, error) {
-	u, err := makeRequestURL(input, c)
-	if err != nil {
-		return nil, err
-	}
 
-	result, err := postRequest[dto.OpenChannelResponse](ctx, c.hc, u, input)
+	result, err := postRequest[dto.OpenChannelResponse](ctx, c, input)
 	if err != nil {
 		return nil, err
 	}
@@ -47,12 +39,8 @@ func (c *Client) OpenChannelUnregisterOperators(
 	ctx context.Context,
 	input *dto.OpenChannelUnregisterOperatorRequest,
 ) (*dto.EmptyResponse, error) {
-	u, err := makeRequestURL(input, c)
-	if err != nil {
-		return nil, err
-	}
 
-	result, err := deleteRequest[dto.EmptyResponse](ctx, c.hc, u)
+	result, err := deleteRequest[dto.EmptyResponse](ctx, c, input)
 	if err != nil {
 		return nil, err
 	}
@@ -62,12 +50,8 @@ func (c *Client) OpenChannelUnregisterOperators(
 
 // OpenChannelList list all open channels
 func (c *Client) OpenChannelList(ctx context.Context, input *dto.OpenChannelListRequest) (*dto.OpenChannelListResponse, error) {
-	u, err := makeRequestURL(input, c)
-	if err != nil {
-		return nil, err
-	}
 
-	result, err := getRequest[dto.OpenChannelListResponse](ctx, c.hc, u)
+	result, err := getRequest[dto.OpenChannelListResponse](ctx, c, input)
 	if err != nil {
 		return nil, err
 	}
@@ -77,12 +61,8 @@ func (c *Client) OpenChannelList(ctx context.Context, input *dto.OpenChannelList
 
 // OpenChannelGet retrieves information on an open channel.
 func (c *Client) OpenChannelGet(ctx context.Context, input *dto.OpenChannelGetRequest) (*dto.OpenChannelResponse, error) {
-	u, err := makeRequestURL(input, c)
-	if err != nil {
-		return nil, err
-	}
 
-	result, err := getRequest[dto.OpenChannelResponse](ctx, c.hc, u)
+	result, err := getRequest[dto.OpenChannelResponse](ctx, c, input)
 	if err != nil {
 		return nil, err
 	}
@@ -92,12 +72,8 @@ func (c *Client) OpenChannelGet(ctx context.Context, input *dto.OpenChannelGetRe
 
 // OpenChannelCreate creates an open channel.
 func (c *Client) OpenChannelCreate(ctx context.Context, input *dto.OpenChannelCreateRequest) (*dto.OpenChannelResponse, error) {
-	u, err := makeRequestURL(input, c)
-	if err != nil {
-		return nil, err
-	}
 
-	result, err := postRequest[dto.OpenChannelResponse](ctx, c.hc, u, input)
+	result, err := postRequest[dto.OpenChannelResponse](ctx, c, input)
 	if err != nil {
 		return nil, err
 	}
@@ -107,12 +83,8 @@ func (c *Client) OpenChannelCreate(ctx context.Context, input *dto.OpenChannelCr
 
 // OpenChannelUpdate Updates information on a specific open channel.
 func (c *Client) OpenChannelUpdate(ctx context.Context, input *dto.OpenChannelUpdateRequest) (*dto.OpenChannelResponse, error) {
-	u, err := makeRequestURL(input, c)
-	if err != nil {
-		return nil, err
-	}
 
-	result, err := putRequest[dto.OpenChannelResponse](ctx, c.hc, u, input)
+	result, err := putRequest[dto.OpenChannelResponse](ctx, c, input)
 	if err != nil {
 		return nil, err
 	}
@@ -122,12 +94,8 @@ func (c *Client) OpenChannelUpdate(ctx context.Context, input *dto.OpenChannelUp
 
 // OpenChannelDelete deletes a specific open channel.
 func (c *Client) OpenChannelDelete(ctx context.Context, input *dto.OpenChannelDeleteRequest) (*dto.EmptyResponse, error) {
-	u, err := makeRequestURL(input, c)
-	if err != nil {
-		return nil, err
-	}
 
-	result, err := deleteRequest[dto.EmptyResponse](ctx, c.hc, u)
+	result, err := deleteRequest[dto.EmptyResponse](ctx, c, input)
 	if err != nil {
 		return nil, err
 	}
