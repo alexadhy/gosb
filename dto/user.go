@@ -31,6 +31,8 @@ type UserResponse struct {
 	PushTriggerOption         *string   `json:"push_trigger_option,omitempty"`
 	DoNotDisturb              *bool     `json:"do_not_disturb,omitempty"`
 	Error                     *Error    `json:"error,omitempty"`
+	RemainingDuration         int       `json:"remaining_duration,omitempty"`
+	EndAt                     int       `json:"end_at,omitempty"`
 }
 
 // UserGetRequest is the request payload to user GET endpoint

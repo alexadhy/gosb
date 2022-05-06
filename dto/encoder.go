@@ -35,7 +35,25 @@ type hasQSTag interface {
 		AnnouncementListRequest |
 		AnnouncementGroupListRequest |
 		AnnouncementViewStatisticsRequest |
-		DataExportRequest
+		DataExportRequest |
+		DataExportRequest |
+		ListReportRequest |
+		ListReportUserRequest |
+		ListReportChannelRequest |
+		ListReportMessageRequest |
+		ListReportModerationMessageRequest |
+		ModerationListBlockedUsersRequest |
+		ModerationListUsersMutedChannelsRequest |
+		ModerationListMutedUserInOpenChannelRequest |
+		ModerationListMutedUserInGroupChannelRequest |
+		ModerationListMutedUsersInOpenChannelRequest |
+		ModerationListMutedUsersInGroupChannelRequest |
+		ModerationListMutedUsersInCustomChannelRequest |
+		ModerationListBannedUsersRequest |
+		ModerationListBannedUsersInOpenChannelRequest |
+		ModerationListBannedUsersInGroupChannelRequest |
+		ModerationListBannedUsersInCustomChannelRequest |
+		ModerationUnbanUserFromCustomChannelRequest
 }
 
 // encodeQS takes baseURL and struct with `qs` tag

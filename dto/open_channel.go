@@ -69,18 +69,22 @@ func (o OpenChannelUnregisterOperatorRequest) URL(baseURL string) string {
 
 // OpenChannelResponse is the response to open channel view endpoint
 type OpenChannelResponse struct {
-	Name             *string        `json:"name,omitempty"`
-	ChannelURL       *string        `json:"channel_url,omitempty"`
-	CustomType       *string        `json:"custom_type,omitempty"`
-	IsEphemeral      *bool          `json:"is_ephemeral,omitempty"`
-	ParticipantCount *int64         `json:"participant_count,omitempty"`
-	MaxLengthMessage *int64         `json:"max_length_message,omitempty"`
-	CreatedAt        *int64         `json:"created_at,omitempty"`
-	CoverURL         *string        `json:"cover_url,omitempty"`
-	Data             *string        `json:"data,omitempty"`
-	Operators        []UserResponse `json:"operators,omitempty"`
-	Freeze           *bool          `json:"freeze,omitempty"`
-	Error            *Error         `json:"error,omitempty"`
+	Name                 *string        `json:"name,omitempty"`
+	ChannelURL           *string        `json:"channel_url,omitempty"`
+	CustomType           *string        `json:"custom_type,omitempty"`
+	IsEphemeral          *bool          `json:"is_ephemeral,omitempty"`
+	ParticipantCount     *int64         `json:"participant_count,omitempty"`
+	MaxLengthMessage     *int64         `json:"max_length_message,omitempty"`
+	CreatedAt            *int64         `json:"created_at,omitempty"`
+	CoverURL             *string        `json:"cover_url,omitempty"`
+	Data                 *string        `json:"data,omitempty"`
+	Operators            []UserResponse `json:"operators,omitempty"`
+	Freeze               *bool          `json:"freeze,omitempty"`
+	RemainingDuration    *int           `json:"remaining_duration,omitempty"`
+	StartAt              *int           `json:"start_at,omitempty"`
+	EndAt                *int           `json:"end_at,omitempty"`
+	IsDynamicPartitioned *bool          `json:"is_dynamic_partitioned,omitempty"`
+	Error                *Error         `json:"error,omitempty"`
 }
 
 // OpenChannelListRequest is the url query values for List open channels endpoint

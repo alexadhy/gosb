@@ -90,6 +90,9 @@ type GroupChannelResponse struct {
 	LastMessage          Message        `json:"last_message"`
 	CreatedAt            *int64         `json:"created_at,omitempty"`
 	Freeze               *bool          `json:"freeze,omitempty"`
+	RemainingDuration    *int           `json:"remaining_duration,omitempty"`
+	StartAt              *int           `json:"start_at,omitempty"`
+	EndAt                *int           `json:"end_at,omitempty"`
 	Error                *Error         `json:"error,omitempty"`
 }
 
