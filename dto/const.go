@@ -8,6 +8,7 @@ const (
 	customChannelEndpoint     = "applications/settings_by_channel_custom_type"
 	defaultInvitationEndpoint = "applications/default_channel_invitation_preference"
 	settingsEndpoint          = "applications/settings"
+	globalSettingsEndpoint    = "applications/settings_global"
 	msgEndpoint               = "messages"
 	announcementEndpoint      = "announcements"
 )
