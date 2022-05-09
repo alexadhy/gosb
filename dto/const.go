@@ -11,6 +11,8 @@ const (
 	globalSettingsEndpoint    = "applications/settings_global"
 	msgEndpoint               = "messages"
 	announcementEndpoint      = "announcements"
+	statisticsEndpoint        = "statistics"
+	applicationsEndpoint      = "applications"
 )
 
 // Order is the order url query value
