@@ -40,23 +40,27 @@ type ModerationMuteUserInGroupChannelRequest struct {
 	Description string `json:"description,omitempty"`
 }
 
+// URL returns URL string to mute user in a group channel
 func (m ModerationMuteUserInGroupChannelRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s/mute", baseURL, groupChannelEndpoint, m.ChannelURL)
 }
 
+// ModerationMuteUserInCustomChannelRequest is the request type to mute user in a custom channel
 type ModerationMuteUserInCustomChannelRequest struct {
-	UserID string `json:"user_id"`
-	// body
+	UserID             string   `json:"user_id"`
 	ChannelCustomTypes []string `json:"channel_custom_types"`
 }
 
+// ModerationMuteUserInCustomChannelResponse mute user in a custom typed channels
 type ModerationMuteUserInCustomChannelResponse EmptyResponse
 
+// URL returns URL string to custom channel(s) with custom type
 func (m ModerationMuteUserInCustomChannelRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s/muted_channel_custom_types", baseURL, userEndpoint, m.UserID)
 }
 
-type ModerationMuteUsersInCustomChannelRequest struct {
+// ModerationUsersMuteInCustomChannelRequest mutes user(s) in custom channel(s) with custom type
+type ModerationUsersMuteInCustomChannelRequest struct {
 	CustomType string `json:"custom_type"`
 	// body
 	UserIds []string `json:"user_ids"`
@@ -66,9 +70,9 @@ type ModerationMuteUsersInCustomChannelRequest struct {
 	OnDemandUpsert bool   `json:"on_demand_upsert,omitempty"`
 }
 
-type ModerationMuteUsersInCustomChannelResponse struct{}
+type ModerationUsersMuteInCustomChannelResponse struct{}
 
-func (m ModerationMuteUsersInCustomChannelRequest) URL(baseURL string) string {
+func (m ModerationUsersMuteInCustomChannelRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s/mute", baseURL, customChannelEndpoint, m.CustomType)
 }
 
@@ -135,7 +139,7 @@ func (m ModerationListUsersMutedChannelsRequest) URL(baseURL string) string {
 	return base
 }
 
-type ModerationListMutedUsersInOpenChannelRequest struct {
+type ModerationUsersListMutedInOpenChannelRequest struct {
 	ChannelURL string `json:"channel_url"`
 	//optional
 	ShowTotalMuteCount bool   `qs:"show_total_mute_count,omitempty"`
@@ -143,15 +147,15 @@ type ModerationListMutedUsersInOpenChannelRequest struct {
 	Limit              int    `qs:"limit,omitempty"`
 }
 
-type ModerationListMutedUsersInOpenChannelResponse struct {
+type ModerationUsersListMutedInOpenChannelResponse struct {
 	MutedList      []ModerationUserResource `json:"muted_list"`
 	TotalMuteCount int                      `json:"total_mute_count"`
 	Next           string                   `json:"next"`
 }
 
-func (m ModerationListMutedUsersInOpenChannelRequest) URL(baseURL string) string {
+func (m ModerationUsersListMutedInOpenChannelRequest) URL(baseURL string) string {
 	base := fmt.Sprintf("%s/%s/%s/mute", baseURL, openChannelEndpoint, m.ChannelURL)
-	base, _ = encodeQS[ModerationListMutedUsersInOpenChannelRequest](base, m)
+	base, _ = encodeQS[ModerationUsersListMutedInOpenChannelRequest](base, m)
 	return base
 }
 
@@ -294,6 +298,7 @@ type ModerationListBlockedUsersResponse struct {
 	Error *Error         `json:"error,omitempty"`
 }
 
+// URL returns URL string to list users
 func (m ModerationListBlockedUsersRequest) URL(baseURl string) string {
 	base := fmt.Sprintf("%s/%s/%s/block", baseURl, userEndpoint, m.UserID)
 	base, _ = encodeQS[ModerationListBlockedUsersRequest](base, m)
@@ -355,6 +360,7 @@ func (m ModerationBanUserFromCustomChannelRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s/banned_channel_custom_types", baseURL, userEndpoint, m.UserID)
 }
 
+// ModerationBanUsersFromCustomChannelRequest request payload for banning users from custom channel
 type ModerationBanUsersFromCustomChannelRequest struct {
 	CustomType string `json:"custom_type"`
 	// body
@@ -514,8 +520,10 @@ func (m ModerationListBannedUsersInOpenChannelRequest) URL(baseURL string) strin
 	return base
 }
 
+// ModerationListBannedUsersInGroupChannelRequest is the request type to list banned users in group channel
 type ModerationListBannedUsersInGroupChannelRequest ModerationListBannedUsersInOpenChannelRequest
 
+// ModerationListBannedUsersInGroupChannelResponse is the response type to list banned users in a group channel
 type ModerationListBannedUsersInGroupChannelResponse ModerationListBannedUsersInOpenChannelResponse
 
 // URL returns the url to retrieve the list of users who are banned from a group channel
