@@ -30,7 +30,8 @@ type Message struct {
 	*TextMessage
 	*FileMessage
 	*AdminMessage
-	MessageSurvivalSeconds *int `json:"message_survival_seconds,omitempty"`
+	MessageSurvivalSeconds *int   `json:"message_survival_seconds,omitempty"`
+	Error                  *Error `json:"error,omitempty"`
 }
 
 // UnmarshalJSON unmarshal Message type to its member type (FileMessage / TextMessage / AdminMessage)
@@ -183,8 +184,8 @@ type MessageListResponse struct {
 	Error    *Error    `json:"error,omitempty"`
 }
 
-// MessageGetRequest is the request parameter & url values to get message endpoint
-type MessageGetRequest struct {
+// MessageViewRequest is the request parameter & url values to get message endpoint
+type MessageViewRequest struct {
 	CommonMessageRequest
 	MessageID                int64 `qs:"-"`
 	IncludeParentMessageInfo *bool `qs:"include_parent_message_info,omitempty"`
@@ -195,17 +196,17 @@ type MessageGetRequest struct {
 
 // URL returns URL string for get message endpoint
 // GET https://api-{application_id}.sendbird.com/v3/{channel_type}/{channel_url}/messages/{message_id}
-func (m MessageGetRequest) URL(baseURL string) string {
+func (m MessageViewRequest) URL(baseURL string) string {
 	base := fmt.Sprintf("%s/%s/%s/%s/%d", baseURL, m.ChannelType, m.ChannelURL, msgEndpoint, m.MessageID)
-	s, err := encodeQS[MessageGetRequest](base, m)
+	s, err := encodeQS[MessageViewRequest](base, m)
 	if err != nil {
 		return ""
 	}
 	return s
 }
 
-// MessageGetResponse is an alias for Message
-type MessageGetResponse Message
+// MessageViewResponse is an alias for Message
+type MessageViewResponse Message
 
 // MessageSendRequest is the request payload to send message endpoint
 type MessageSendRequest struct {
