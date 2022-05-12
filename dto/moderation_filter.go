@@ -53,7 +53,7 @@ type ModerationProfanityFilterCustomChannelResponse struct {
 	Channel
 }
 
-// To apply the filter to channels with a custom channel type.
+// URL returns URL string to apply the filter to channels with a custom channel type.
 // PUT https://api-{application_id}.sendbird.com/v3/applications/settings_by_channel_custom_type/{custom_type}
 func (m ModerationProfanityFilterCustomChannelRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s", baseURL, customChannelEndpoint, m.CustomType)
@@ -87,7 +87,7 @@ type ModerationImageApplicationWideRequest struct {
 
 type ModerationImageApplicationWideResponse ModerationFilterApplicationWideResponse
 
-// To apply the settings application-wide.
+// URL returns URL string to apply the settings application-wide.
 // PUT https://api-{application_id}.sendbird.com/v3/applications/settings_global
 func (m ModerationImageApplicationWideRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s", baseURL, globalSettingsEndpoint)
@@ -99,7 +99,7 @@ type ModerationImageCustomChannelResponse struct {
 	Channel
 }
 
-// To apply the filter to channels with a custom channel type.
+// URL returns URL string to apply the filter to channels with a custom channel type.
 // PUT https://api-{application_id}.sendbird.com/v3/applications/settings_by_channel_custom_type/{custom_type}
 func (m ModerationImageCustomChannelRequest) URL(baseURL string) string {
 	return fmt.Sprintf("%s/%s/%s", baseURL, customChannelEndpoint, m.CustomType)

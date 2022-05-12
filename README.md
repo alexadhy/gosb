@@ -8,8 +8,8 @@ Sendbird's Chat Platform API wrapper in Go
 - [ ] TBA
 
 ### Chat
-- [ ] Application
+- [x] Application
 - [ ] Organization
-- [ ] Moderation
-- [ ] Statistics
+- [x] Moderation
+- [x] Statistics
 - [ ] Bot
