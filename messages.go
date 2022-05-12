@@ -172,3 +172,15 @@ func (c *Client) MessageDeleteReply(
 	}
 	return res, res.Error
 }
+
+// MessageSearch searches messages containing specific term
+func (c *Client) MessageSearch(
+	ctx context.Context,
+	input *dto.MessageSearchRequest,
+) (*dto.MessageSearchResponse, error) {
+	res, err := getRequest[dto.MessageSearchResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
