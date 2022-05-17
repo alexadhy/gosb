@@ -401,3 +401,99 @@ func (c *Client) EmojiAddCategory(
 	}
 	return res, res.Error
 }
+
+// EmojiUpdateCategory updates an emoji category URL
+func (c *Client) EmojiUpdateCategory(
+	ctx context.Context,
+	input *dto.EmojiCategoryUpdateRequest,
+) (*dto.EmojiCategoryUpdateResponse, error) {
+	res, err := putRequest[dto.EmojiCategoryUpdateResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiDeleteCategory deletes specific emoji category
+func (c *Client) EmojiDeleteCategory(
+	ctx context.Context,
+	input *dto.EmojiCategoryDeleteRequest,
+) (*dto.EmojiCategoryDeleteResponse, error) {
+	res, err := deleteRequest[dto.EmojiCategoryDeleteResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// MessageTranslate translates a message into specific language
+func (c *Client) MessageTranslate(
+	ctx context.Context,
+	input *dto.MessageTranslateRequest,
+) (*dto.MessageTranslateResponse, error) {
+	res, err := postRequest[dto.MessageTranslateResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// AnnouncementList lists all announcements
+func (c *Client) AnnouncementList(
+	ctx context.Context,
+	input *dto.AnnouncementListRequest,
+) (*dto.AnnouncementListResponse, error) {
+	res, err := getRequest[dto.AnnouncementListResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// AnnouncementView retrieves information on specific announcement
+func (c *Client) AnnouncementView(
+	ctx context.Context,
+	input *dto.AnnouncementViewRequest,
+) (*dto.AnnouncementViewResponse, error) {
+	res, err := getRequest[dto.AnnouncementViewResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// AnnouncementCreate creates an announcement
+func (c *Client) AnnouncementCreate(
+	ctx context.Context,
+	input *dto.AnnouncementCreateRequest,
+) (*dto.AnnouncementCreateResponse, error) {
+	res, err := postRequest[dto.AnnouncementCreateResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// AnnouncementUpdate Updates an announcement
+func (c *Client) AnnouncementUpdate(
+	ctx context.Context,
+	input *dto.AnnouncementUpdateRequest,
+) (*dto.EmptyResponse, error) {
+	res, err := putRequest[dto.EmptyResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// AnnouncementViewStats retrieves information on specific announcement statistics
+func (c *Client) AnnouncementViewStats(
+	ctx context.Context,
+	input *dto.AnnouncementViewStatisticsRequest,
+) (*dto.AnnouncementViewStatisticsResponse, error) {
+	res, err := getRequest[dto.AnnouncementViewStatisticsResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
