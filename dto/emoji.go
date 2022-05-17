@@ -54,6 +54,9 @@ func (e EmojiListReactionsRequest) URL(baseURL string) string {
 	return s
 }
 
+// EmojiListReactionsResponse is the response type to list all reactions to specific message
+type EmojiListReactionsResponse map[string]any
+
 // ReactionListUserOrCount is a generic constraint for emoji reaction response
 type ReactionListUserOrCount interface {
 	[]string | int
@@ -162,6 +165,50 @@ func (e EmojiAddRequest) URL(baseURL string) string {
 // EmojiAddResponse returns list of newly added []Emoji
 type EmojiAddResponse EmojiListAllResponse
 
+// EmojiUpdateURLRequest contains URL params and request body to be sent to update an emoji URL
+type EmojiUpdateURLRequest struct {
+	EmojiKey string `json:"-" qs:"-"`
+	EmojiURL string `json:"url"`
+}
+
+// URL returns properly escaped path to
+// PUT /v3/emojis/{emoji_key}
+func (e *EmojiUpdateURLRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/emojis/%s", baseURL, e.EmojiKey)
+}
+
+// EmojiUpdateURLResponse  is the response payload to update emoji URL response
+type EmojiUpdateURLResponse Emoji
+
+// EmojiDeleteRequest deletes specific emoji from the application
+type EmojiDeleteRequest struct {
+	EmojiKey string `json:"-" qs:"-"`
+}
+
+// URL returns URL string to delete specific emoji from the application
+// DELETE /emojis/{emoji_key}
+func (e *EmojiDeleteRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/emojis/%s", baseURL, e.EmojiKey)
+}
+
+// EmojiDeleteResponse is the response payload to deletion of specific emoji from the app
+type EmojiDeleteResponse EmptyResponse
+
+// EmojiListAllCategoriesRequest retrieves an array of all emoji categories with their emojis
+type EmojiListAllCategoriesRequest struct{}
+
+// URL returns the URL string
+func (e *EmojiListAllCategoriesRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/emoji_categories", baseURL)
+}
+
+// EmojiListAllCategoriesResponse is the response payload to list all emoji categories
+type EmojiListAllCategoriesResponse struct {
+	Hash       string          `json:"emoji_hash"`
+	Categories []EmojiCategory `json:"emoji_categories"`
+	Error      *Error          `json:"error,omitempty"`
+}
+
 // EmojiCategoryUpdateRequest contains URL params and request body to update emoji in an app
 type EmojiCategoryUpdateRequest struct {
 	CategoryID  int    `json:"-"`
@@ -189,3 +236,34 @@ func (e EmojiCategoryDeleteRequest) URL(baseURL string) string {
 
 // EmojiCategoryDeleteResponse is the response type to EmojiCategory delete endpoint
 type EmojiCategoryDeleteResponse EmptyResponse
+
+// EmojiViewCategoryRequest retrieves a specific emoji category including its emojis
+type EmojiViewCategoryRequest struct {
+	CategoryID int `json:"-" qs:"-"`
+}
+
+// URL returns URL string to view specific emoji category along with its emojis
+// GET /emoji_categories/{emoji_category_id}
+func (e EmojiViewCategoryRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/emoji_categories/%d", baseURL, e.CategoryID)
+}
+
+// EmojiViewCategoryResponse views category response
+type EmojiViewCategoryResponse EmojiCategory
+
+// EmojiAddCategoryRequest is the request body to add emoji category to an application
+type EmojiAddCategoryRequest struct {
+	Categories []EmojiCategory `json:"emoji_categories"`
+}
+
+// URL returns URL string to
+// POST /emoji_categories
+func (e EmojiAddCategoryRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/emoji_categories", baseURL)
+}
+
+// EmojiAddCategoryResponse is the response type you got after adding emoji category(ies) to an app
+type EmojiAddCategoryResponse struct {
+	EmojiAddCategoryRequest
+	Error *Error `json:"error,omitempty"`
+}

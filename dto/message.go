@@ -714,6 +714,39 @@ type MessageMarkAllAsDeliveredResponse struct {
 	Error *Error `json:"error,omitempty"`
 }
 
+// MessageMarkAllAsReadRequest is the request payload and URL params to mark all messages as read on group channel.
+type MessageMarkAllAsReadRequest struct {
+	ChannelURL string `json:"-"`
+	UserID     string `json:"user_id"`
+	Timestamp  int64  `json:"timestamp,omitempty"`
+}
+
+// URL provides URL string to mark all messages in a group channel as read for a specific user endpoint.
+// PUT /group_channels/{channel_url}/messages/mark_as_read
+func (m MessageMarkAllAsReadRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/%s/%s/%s/mark_as_read", baseURL, groupChannelEndpoint, m.ChannelURL, msgEndpoint)
+}
+
+// MessageMarkAllAsReadResponse is the response payload to mark all messages as read on group channel endpoint
+type MessageMarkAllAsReadResponse EmptyResponse
+
+// MessageMarkAllAsReadAllJoinedGroupChannelRequest is the request payload and URL param to mark all of user's
+// unread messages as read in specified group channels
+type MessageMarkAllAsReadAllJoinedGroupChannelRequest struct {
+	UserID      string   `json:"-"`
+	ChannelURLs []string `json:"channel_urls"`
+}
+
+// URL returns URL string to mark all messages as read on group channel endpoint
+// PUT /users/{user_id}/mark_as_read_all
+func (m MessageMarkAllAsReadAllJoinedGroupChannelRequest) URL(baseURL string) string {
+	return fmt.Sprintf("%s/%s/mark_as_read_all", baseURL, m.UserID)
+}
+
+// MessageMarkAllAsReadAllJoinedGroupChannelResponse is the response type to marks all of a user’s unread messages
+// as read in group channels.
+type MessageMarkAllAsReadAllJoinedGroupChannelResponse EmptyResponse
+
 // MessageViewUnreadCountRequest is the request parameters
 type MessageViewUnreadCountRequest struct {
 	ChannelURL string   `qs:"-"`

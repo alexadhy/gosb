@@ -184,3 +184,220 @@ func (c *Client) MessageSearch(
 	}
 	return res, res.Error
 }
+
+// MessageMigrate migrates messages from another system into Sendbird's system
+func (c *Client) MessageMigrate(
+	ctx context.Context,
+	input *dto.MessageMigrateRequest,
+) (*dto.MessageMigrateResponse, error) {
+	res, err := postRequest[dto.MessageMigrateResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// MessageMarkAllDeliveredGroupChannel marks all messages in a group channel as delivered for a specific user.
+func (c *Client) MessageMarkAllDeliveredGroupChannel(
+	ctx context.Context,
+	input *dto.MessageMarkAllAsDeliveredRequest,
+) (*dto.MessageMarkAllAsDeliveredResponse, error) {
+	res, err := putRequest[dto.MessageMarkAllAsDeliveredResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// MessageMarkAllAsReadGroupChannel marks all messages in a group channel as read for a specific user.
+func (c *Client) MessageMarkAllAsReadGroupChannel(
+	ctx context.Context,
+	input *dto.MessageMarkAllAsReadRequest,
+) (*dto.MessageMarkAllAsReadResponse, error) {
+	res, err := putRequest[dto.MessageMarkAllAsReadResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// MessageMarkAllAsReadAllJoinedGroupChannel marks all of a user's unread messages as read in group channels.
+func (c *Client) MessageMarkAllAsReadAllJoinedGroupChannel(
+	ctx context.Context,
+	input *dto.MessageMarkAllAsReadAllJoinedGroupChannelRequest,
+) (*dto.MessageMarkAllAsReadAllJoinedGroupChannelResponse, error) {
+	res, err := putRequest[dto.MessageMarkAllAsReadAllJoinedGroupChannelResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// MessageViewUnreadCountMessagesPerMember retrieves the total number of each
+// member's unread messages in a specific group channel.
+func (c *Client) MessageViewUnreadCountMessagesPerMember(
+	ctx context.Context,
+	input *dto.MessageViewUnreadCountRequest,
+) (*dto.MessageViewUnreadCountResponse, error) {
+	res, err := getRequest[dto.MessageViewUnreadCountResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// MessageEnableReactions turns on and off message reactions in a Sendbird application.
+func (c *Client) MessageEnableReactions(
+	ctx context.Context,
+	input *dto.EmojiEnableRequest,
+) (*dto.EmojiEnableResponse, error) {
+	res, err := putRequest[dto.EmojiEnableResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// MessageListReaction retrieves a list of reactions made to a specific message.
+func (c *Client) MessageListReaction(
+	ctx context.Context,
+	input *dto.EmojiListReactionsRequest,
+) (*dto.EmojiListReactionsResponse, error) {
+	res, err := getRequest[dto.EmojiListReactionsResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// MessageAddReaction adds a specific reaction to a message.
+func (c *Client) MessageAddReaction(
+	ctx context.Context,
+	input *dto.EmojiAddReactionRequest,
+) (*dto.EmojiAddReactionResponse, error) {
+	res, err := postRequest[dto.EmojiAddReactionResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// MessageRemoveReaction removes a specific reaction from a message.
+func (c *Client) MessageRemoveReaction(
+	ctx context.Context,
+	input *dto.EmojiDeleteReactionRequest,
+) (*dto.EmojiDeleteReactionResponse, error) {
+	res, err := deleteRequest[dto.EmojiDeleteReactionResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiUseDefault determines whether to use the seven default emojis initially provided by Sendbird.
+func (c *Client) EmojiUseDefault(
+	ctx context.Context,
+	input *dto.EmojiUseDefaultRequest,
+) (*dto.EmptyResponse, error) {
+	res, err := putRequest[dto.EmptyResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiListAll retrieves an array of all emojis registered to the application.
+func (c *Client) EmojiListAll(
+	ctx context.Context,
+	input *dto.EmojiListAllRequest,
+) (*dto.EmojiListAllResponse, error) {
+	res, err := getRequest[dto.EmojiListAllResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiView retrieves a specific emoji.
+func (c *Client) EmojiView(
+	ctx context.Context,
+	input *dto.EmojiViewRequest,
+) (*dto.Emoji, error) {
+	res, err := getRequest[dto.Emoji](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiAdd adds an array of new emojis to the application
+func (c *Client) EmojiAdd(
+	ctx context.Context,
+	input *dto.EmojiAddRequest,
+) (*dto.EmojiAddResponse, error) {
+	res, err := postRequest[dto.EmojiAddResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiUpdateURL updates the image URL of a specific emoji
+func (c *Client) EmojiUpdateURL(
+	ctx context.Context,
+	input *dto.EmojiUpdateURLRequest,
+) (*dto.EmojiUpdateURLResponse, error) {
+	res, err := putRequest[dto.EmojiUpdateURLResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiDelete deletes a specific emoji from the application
+func (c *Client) EmojiDelete(
+	ctx context.Context,
+	input *dto.EmojiDeleteRequest,
+) (*dto.EmojiDeleteResponse, error) {
+	res, err := deleteRequest[dto.EmojiDeleteResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiListAllCategories retrieves an array of all emoji categories with their emojis
+func (c *Client) EmojiListAllCategories(
+	ctx context.Context,
+	input *dto.EmojiListAllCategoriesRequest,
+) (*dto.EmojiListAllCategoriesResponse, error) {
+	res, err := getRequest[dto.EmojiListAllCategoriesResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiViewCategory retrieves a specific emoji category including its emoji
+func (c *Client) EmojiViewCategory(
+	ctx context.Context,
+	input *dto.EmojiViewCategoryRequest,
+) (*dto.EmojiViewCategoryResponse, error) {
+	res, err := getRequest[dto.EmojiViewCategoryResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
+
+// EmojiAddCategory adds an array of new emoji categories to the app
+func (c *Client) EmojiAddCategory(
+	ctx context.Context,
+	input *dto.EmojiAddCategoryRequest,
+) (*dto.EmojiAddCategoryResponse, error) {
+	res, err := postRequest[dto.EmojiAddCategoryResponse](ctx, c, input)
+	if err != nil {
+		return nil, err
+	}
+	return res, res.Error
+}
