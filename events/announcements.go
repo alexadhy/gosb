@@ -13,6 +13,10 @@ type AnnouncementCreateChannels struct {
 	AppID             string       `json:"app_id"`
 }
 
+func (a AnnouncementCreateChannels) EventCategory() string {
+	return a.Category
+}
+
 // AnnouncementSendMessages is invoked when an announcement message is sent to target channels and users
 type AnnouncementSendMessages struct {
 	Category          string            `json:"category"`
@@ -23,4 +27,8 @@ type AnnouncementSendMessages struct {
 	Channel           *dto.Channel      `json:"channel"`
 	Message           *dto.Message      `json:"message"`
 	AppID             string            `json:"app_id"`
+}
+
+func (a AnnouncementSendMessages) EventCategory() string {
+	return a.Category
 }

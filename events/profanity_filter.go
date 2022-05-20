@@ -17,6 +17,10 @@ type ProfanityFilterReplace struct {
 	AppID        string             `json:"app_id"`
 }
 
+func (p ProfanityFilterReplace) EventCategory() string {
+	return p.Category
+}
+
 // ProfanityFilterBlock webhook event is invoked when a message with explicit words is blocked.
 // The following shows a webhook payload for a profanity_filter:block event.
 type ProfanityFilterBlock struct {
@@ -28,6 +32,10 @@ type ProfanityFilterBlock struct {
 	AppID     string            `json:"app_id"`
 }
 
+func (p ProfanityFilterBlock) EventCategory() string {
+	return p.Category
+}
+
 // ProfanityFilterModerate webhook event is invoked when a user is imposed
 // with one of moderation penalties among mute, kick, and ban
 type ProfanityFilterModerate struct {
@@ -36,4 +44,8 @@ type ProfanityFilterModerate struct {
 	ModerationAction dto.ModerationAction `json:"moderation_action"`
 	Channel          *dto.Channel         `json:"channel"`
 	AppID            string               `json:"app_id"`
+}
+
+func (p ProfanityFilterModerate) EventCategory() string {
+	return p.Category
 }

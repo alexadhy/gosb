@@ -18,6 +18,10 @@ type GroupChannelCreate struct {
 	Inviter   *dto.UserResponse `json:"inviter"`
 }
 
+func (g GroupChannelCreate) EventCategory() string {
+	return g.GroupChannelCommon.Category
+}
+
 // GroupChannelChange webhook event is invoked and delivered when one of the following group channel properties
 // has been changed: name and cover_url.
 // The changes property in the payload contains the old and new values of the changed channel properties.
@@ -28,10 +32,18 @@ type GroupChannelChange struct {
 	Inviter   *dto.UserResponse `json:"inviter"`
 }
 
+func (g GroupChannelChange) EventCategory() string {
+	return g.GroupChannelCommon.Category
+}
+
 // GroupChannelRemove webhook event is invoked when a group channel is removed.
 type GroupChannelRemove struct {
 	GroupChannelCommon
 	RemovedAt int64 `json:"removed_at"`
+}
+
+func (g GroupChannelRemove) EventCategory() string {
+	return g.GroupChannelCommon.Category
 }
 
 // GroupChannelInvite webhook event is invoked when a user invites another user.
@@ -46,12 +58,20 @@ type GroupChannelInvite struct {
 	Invitees  []dto.UserResponse `json:"invitees"`
 }
 
+func (g GroupChannelInvite) EventCategory() string {
+	return g.GroupChannelCommon.Category
+}
+
 // GroupChannelDeclineInvite webhook event is invoked when a user declines an invitation.
 // The users property indicates the members who have declined invitations and are in pending status
 type GroupChannelDeclineInvite struct {
 	GroupChannelCommon
 	DeclinedInviteAt int64              `json:"declined_invite_at"`
 	Users            []dto.UserResponse `json:"users"`
+}
+
+func (g GroupChannelDeclineInvite) EventCategory() string {
+	return g.GroupChannelCommon.Category
 }
 
 // GroupChannelJoin webhook event is invoked when a user joins a group channel.
@@ -62,6 +82,10 @@ type GroupChannelJoin struct {
 	Users    []dto.UserResponse `json:"users"`
 }
 
+func (g GroupChannelJoin) EventCategory() string {
+	return g.GroupChannelCommon.Category
+}
+
 // GroupChannelLeave webhook event is invoked when a user leaves a group channel.
 // The users property indicates those who have left a group channel,
 // whereas the members indicates those who still remain in the channel.
@@ -70,6 +94,10 @@ type GroupChannelLeave struct {
 	GroupChannelCommon
 	LeftAt int64              `json:"left_at"`
 	Users  []dto.UserResponse `json:"users"`
+}
+
+func (g GroupChannelLeave) EventCategory() string {
+	return g.GroupChannelCommon.Category
 }
 
 // GroupChannelMessageSend webhook event is invoked when a message is sent within a group channel
@@ -87,11 +115,19 @@ type GroupChannelMessageSend struct {
 	Sdk            string             `json:"sdk"`
 }
 
+func (g GroupChannelMessageSend) EventCategory() string {
+	return g.GroupChannelCommon.Category
+}
+
 // GroupChannelMessageRead webhook event is fired when user has no more unread messages in a group channel
 type GroupChannelMessageRead struct {
 	GroupChannelCommon
 	Members     []dto.UserResponse `json:"members,omitempty"`
 	ReadUpdates []dto.UserResponse `json:"read_updates"`
+}
+
+func (g GroupChannelMessageRead) EventCategory() string {
+	return g.GroupChannelCommon.Category
 }
 
 // GroupChannelMessageUpdate webhook event is invoked when a message is sent within a group channel
@@ -105,6 +141,10 @@ type GroupChannelMessageUpdate struct {
 	Sdk         string             `json:"sdk"`
 }
 
+func (g GroupChannelMessageUpdate) EventCategory() string {
+	return g.GroupChannelCommon.Category
+}
+
 // GroupChannelMessageDelete webhook event is invoked when a message is deleted from group channel
 type GroupChannelMessageDelete struct {
 	GroupChannelCommon
@@ -115,10 +155,18 @@ type GroupChannelMessageDelete struct {
 	Payload     *dto.Message       `json:"payload"`
 }
 
+func (g GroupChannelMessageDelete) EventCategory() string {
+	return g.GroupChannelCommon.Category
+}
+
 // GroupChannelFreezeUnfreeze webhook event is invoked when a channel operator freezes / unfreezes group channel.
 type GroupChannelFreezeUnfreeze struct {
 	GroupChannelCommon
 	Members []dto.UserResponse `json:"members"`
+}
+
+func (g GroupChannelFreezeUnfreeze) EventCategory() string {
+	return g.GroupChannelCommon.Category
 }
 
 // GroupChannelReactionAdd webhook event is invoked when a user adds reactions to a message
@@ -130,6 +178,10 @@ type GroupChannelReactionAdd struct {
 	Message  *dto.Message      `json:"message"`
 }
 
+func (g GroupChannelReactionAdd) EventCategory() string {
+	return g.GroupChannelCommon.Category
+}
+
 // GroupChannelReactionDelete webhook event is invoked when a user deletes reactions from a message.
 type GroupChannelReactionDelete struct {
 	GroupChannelCommon
@@ -137,4 +189,8 @@ type GroupChannelReactionDelete struct {
 	TS       int64             `json:"ts"`
 	User     *dto.UserResponse `json:"user"`
 	Message  *dto.Message      `json:"message"`
+}
+
+func (g GroupChannelReactionDelete) EventCategory() string {
+	return g.GroupChannelCommon.Category
 }

@@ -18,8 +18,16 @@ type OperatorsRegisterByOperator struct {
 	OperatorsCommon
 }
 
+func (o OperatorsRegisterByOperator) EventCategory() string {
+	return o.OperatorsCommon.Category
+}
+
 // OperatorsUnregisterByOperator  is invoked when the registration of one or more operators
 // is canceled by another operator's client app
 type OperatorsUnregisterByOperator struct {
 	OperatorsCommon
+}
+
+func (o OperatorsUnregisterByOperator) EventCategory() string {
+	return o.OperatorsCommon.Category
 }

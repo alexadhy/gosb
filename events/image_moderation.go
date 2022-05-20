@@ -12,3 +12,7 @@ type ImageModerationBlock struct {
 	MessageText string            `json:"message_text"`
 	AppID       string            `json:"app_id"`
 }
+
+func (i ImageModerationBlock) EventCategory() string {
+	return i.Category
+}

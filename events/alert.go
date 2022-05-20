@@ -8,3 +8,7 @@ type AlertUserMessageRateLimitExceeded struct {
 	User     *dto.UserResponse `json:"user"`
 	AppID    string            `json:"app_id"`
 }
+
+func (a AlertUserMessageRateLimitExceeded) EventCategory() string {
+	return a.Category
+}
