@@ -39,7 +39,8 @@ func (o OpenChannelRemove) EventCategory() string {
 // OpenChannelEnter event is fired on user entering an open channel
 type OpenChannelEnter struct {
 	OpenChannelCommon
-	EnteredAt int64 `json:"entered_at"`
+	EnteredAt int64             `json:"entered_at"`
+	User      *dto.UserResponse `json:"user"`
 }
 
 func (o OpenChannelEnter) EventCategory() string {
