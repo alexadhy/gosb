@@ -19,14 +19,14 @@ type Announcement struct {
 	SentUserCount      *int64   `json:"sent_user_count,omitempty"`
 	OpenCount          *int64   `json:"open_count,omitempty"`
 	OpenRate           *int64   `json:"open_rate,omitempty"`
-	Error              *Error   `json:"error,omitempty"`
+	Error
 }
 
 // AnnouncementListResponse is the response type to list announcement endpoint
 type AnnouncementListResponse struct {
 	Announcements []Announcement `json:"announcements,omitempty"`
 	NextPageToken *string        `json:"next,omitempty"`
-	Error         *Error         `json:"error,omitempty"`
+	Error
 }
 
 // AnnouncementListRequest is the request params & query value(s) to list announcements endpoint
@@ -62,7 +62,7 @@ func (a AnnouncementGroupListRequest) URL(baseURL string) string {
 type AnnouncementGroupListResponse struct {
 	AnnouncementGroup []string `json:"announcement_group,omitempty"`
 	NextPageToken     *string  `json:"next,omitempty"`
-	Error             *Error   `json:"error,omitempty"`
+	Error
 }
 
 // AnnouncementViewRequest is the request URL params needed to call view announcement endpoint
@@ -185,5 +185,5 @@ type AnnouncementViewStatisticsResponse struct {
 	Days          *int           `json:"days,omitempty"`
 	Weeks         *int           `json:"weeks,omitempty"`
 	Month         *int           `json:"months,omitempty"`
-	Error         *Error         `json:"error,omitempty"`
+	Error
 }

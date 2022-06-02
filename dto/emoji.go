@@ -8,7 +8,7 @@ type EmojiCategory struct {
 	Name          string `json:"name,omitempty"` // Name of the emoji category
 	URL           string `json:"url,omitempty"`
 	ApplicationID int    `json:"application_id,omitempty"`
-	Error         *Error `json:"error,omitempty"`
+	Error
 }
 
 // Emoji corresponds to the SendBird's response type to emoji
@@ -18,7 +18,7 @@ type Emoji struct {
 	URL             string `json:"url,omitempty"`
 	ApplicationID   int    `json:"application_id,omitempty"`
 	EmojiCategoryID int    `json:"emoji_category_id,omitempty"`
-	Error           *Error `json:"error,omitempty"`
+	Error
 }
 
 // EmojiEnableRequest turns on and off message reactions in SendBird app
@@ -34,8 +34,8 @@ func (e EmojiEnableRequest) URL(baseURL string) string {
 
 // EmojiEnableResponse is the response type to emoji enablement preference endpoint.
 type EmojiEnableResponse struct {
-	Reactions *bool  `json:"reactions"`
-	Error     *Error `json:"error,omitempty"`
+	Reactions *bool `json:"reactions"`
+	Error
 }
 
 // EmojiListReactionsRequest contains URL params, and query values for listing emoji reactions endpoint
@@ -90,7 +90,7 @@ type EmojiReactionEventResponse struct {
 	Success   *bool   `json:"success,omitempty"`
 	Reaction  *string `json:"reaction,omitempty"`
 	UpdatedAt *int64  `json:"updated_at,omitempty"`
-	Error     *Error  `json:"error,omitempty"`
+	Error
 }
 
 // EmojiDeleteReactionRequest is the URL params & query value(s) for deleting emoji reaction to a message
@@ -130,7 +130,7 @@ type EmojiListAllRequest struct{}
 // EmojiListAllResponse lists all emoji resources
 type EmojiListAllResponse struct {
 	Emojis []Emoji `json:"emojis,omitempty"`
-	Error  *Error  `json:"error,omitempty"`
+	Error
 }
 
 // URL returns URL string to list all available emojis in an application
@@ -206,7 +206,7 @@ func (e *EmojiListAllCategoriesRequest) URL(baseURL string) string {
 type EmojiListAllCategoriesResponse struct {
 	Hash       string          `json:"emoji_hash"`
 	Categories []EmojiCategory `json:"emoji_categories"`
-	Error      *Error          `json:"error,omitempty"`
+	Error
 }
 
 // EmojiCategoryUpdateRequest contains URL params and request body to update emoji in an app
@@ -265,5 +265,5 @@ func (e EmojiAddCategoryRequest) URL(baseURL string) string {
 // EmojiAddCategoryResponse is the response type you got after adding emoji category(ies) to an app
 type EmojiAddCategoryResponse struct {
 	EmojiAddCategoryRequest
-	Error *Error `json:"error,omitempty"`
+	Error
 }

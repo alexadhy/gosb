@@ -12,7 +12,7 @@ type Settings struct {
 	UserMessagesPerChannel         *int64                        `json:"user_messages_per_channel,omitempty"`
 	ProfanityTriggeredModeration   *ProfanityTriggeredModeration `json:"profanity_triggered_moderation,omitempty"`
 	MessageRetentionHours          *int64                        `json:"message_retention_hours,omitempty"`
-	Error                          Error                         `json:"error,omitempty"`
+	Error
 }
 
 // DomainFilter is the domain filter

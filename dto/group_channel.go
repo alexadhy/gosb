@@ -28,7 +28,7 @@ func (o GroupChannelListOperatorsRequest) URL(baseURL string) string {
 type GroupChannelListOperatorsResponse struct {
 	Operators     []UserResponse `json:"operators,omitempty"`
 	NextPageToken string         `json:"next,omitempty"`
-	Error         Error          `json:"error,omitempty"`
+	Error
 }
 
 // GroupChannelRegisterOperatorRequest is the request payload for registering operator to an group channel
@@ -93,7 +93,7 @@ type GroupChannelResponse struct {
 	RemainingDuration    *int           `json:"remaining_duration,omitempty"`
 	StartAt              *int           `json:"start_at,omitempty"`
 	EndAt                *int           `json:"end_at,omitempty"`
-	Error                *Error         `json:"error,omitempty"`
+	Error
 }
 
 // GroupChannelListRequest is the url query values for List group channels endpoint
@@ -155,7 +155,7 @@ func (o GroupChannelListRequest) URL(baseURL string) string {
 type GroupChannelListResponse struct {
 	Channels      []GroupChannelResponse `json:"channels,omitempty"`
 	NextPageToken string                 `json:"next,omitempty"`
-	Error         Error                  `json:"error,omitempty"`
+	Error
 }
 
 // GroupChannelGetRequest is there to construct endpoint for get group channel
@@ -348,7 +348,7 @@ func (o GroupChannelListMembersRequest) URL(baseURL string) string {
 type GroupChannelListMembersResponse struct {
 	Members       []UserResponse `json:"members,omitempty"`
 	NextPageToken *string        `json:"next,omitempty"`
-	Error         *Error         `json:"error,omitempty"`
+	Error
 }
 
 // GroupChannelCheckMemberRequest is the request parameter to check user membership in a group
@@ -365,8 +365,8 @@ func (o GroupChannelCheckMemberRequest) URL(baseURL string) string {
 
 // GroupChannelCheckMemberResponse is the response type / payload to GroupChannelCheckMemberResponse endpoint
 type GroupChannelCheckMemberResponse struct {
-	IsMember *bool  `json:"is_member,omitempty"`
-	Error    *Error `json:"error,omitempty"`
+	IsMember *bool `json:"is_member,omitempty"`
+	Error
 }
 
 // GroupChannelInviteMembersRequest is the request payload to invite members endpoint

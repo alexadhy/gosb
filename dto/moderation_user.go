@@ -129,7 +129,7 @@ type ModerationListUsersMutedChannelsRequest struct {
 type ModerationListUsersMutedChannelsResponse struct {
 	MutedChannels []Channel `json:"muted_channels,omitempty"`
 	Next          string    `json:"next,omitempty"`
-	Error         *Error    `json:"error,omitempty"`
+	Error
 }
 
 // URL returns URL string to list of open & group channels where the user is muted.
@@ -177,7 +177,7 @@ type ModerationListMutedUsersInGroupChannelResponse struct {
 	MutedList      []ModerationUserResource `json:"muted_list"`
 	TotalMuteCount int                      `json:"total_mute_count"`
 	Next           string                   `json:"next"`
-	Error          *Error                   `json:"error,omitempty"`
+	Error
 }
 
 // URL returns URL string to list muted members in group channel endpoint
@@ -199,7 +199,7 @@ type ModerationListMutedUsersInCustomChannelRequest struct {
 type ModerationListMutedUsersInCustomChannelResponse struct {
 	MutedList []ModerationUserResource `json:"muted_list"`
 	Next      string                   `json:"next"`
-	Error     *Error                   `json:"error,omitempty"`
+	Error
 }
 
 func (m ModerationListMutedUsersInCustomChannelRequest) URL(baseURL string) string {
@@ -221,7 +221,7 @@ type ModerationViewMutedUserInGroupChannelResponse struct {
 	StartAt           int    `json:"start_at"`
 	EndAt             int    `json:"end_at"`
 	Description       string `json:"description"`
-	Error             *Error `json:"error,omitempty"`
+	Error
 }
 
 // URL returns URL string to list muted users in group channel
@@ -242,7 +242,7 @@ type ModerationViewMutedUserInOpenChannelResponse struct {
 	StartAt           int    `json:"start_at"`
 	EndAt             int    `json:"end_at"`
 	Description       string `json:"description"`
-	Error             *Error `json:"error,omitempty"`
+	Error
 }
 
 // URL returns URL string to view muted user in open channel endpoint
@@ -295,7 +295,7 @@ type ModerationListBlockedUsersRequest struct {
 type ModerationListBlockedUsersResponse struct {
 	Users []UserResponse `json:"users,omitempty"`
 	Next  string         `json:"next,omitempty"`
-	Error *Error         `json:"error,omitempty"`
+	Error
 }
 
 // URL returns URL string to list users
@@ -322,7 +322,7 @@ type ModerationBanUserFromOpenChannelResponse struct {
 	StartAt     int          `json:"start_at"`
 	EndAt       int          `json:"end_at"`
 	Description string       `json:"description"`
-	Error       *Error       `json:"error,omitempty"`
+	Error
 }
 
 // URL returns the url to ban a user from an open channel.
@@ -466,7 +466,7 @@ type ModerationListBannedUsersRequest struct {
 type ModerationListBannedUsersResponse struct {
 	BannedChannels []BannedChannel `json:"banned_channel"`
 	Next           string          `json:"next"`
-	Error          *Error          `json:"error,omitempty"`
+	Error
 }
 
 type BannedChannel struct {
@@ -501,7 +501,7 @@ type ModerationListBannedUsersInOpenChannelResponse struct {
 	BannedList    []BannedUser `json:"banned_list"`
 	TotalBanCount int          `json:"total_ban_count"`
 	Next          string       `json:"next"`
-	Error         *Error       `json:"error,omitempty"`
+	Error
 }
 
 // BannedUser is the banned user response type
@@ -547,7 +547,7 @@ type ModerationListBannedUsersInCustomChannelRequest struct {
 type ModerationListBannedUsersInCustomChannelResponse struct {
 	BannedList []BannedUser `json:"banned_list"`
 	Next       string       `json:"next"`
-	Error      *Error       `json:"error,omitempty"`
+	Error
 }
 
 // URL returns the url to retrieve a list of users banned from channels with the specified custom channel type
@@ -572,7 +572,7 @@ type ModerationViewBannedUserInOpenChannelResponse struct {
 	StartAt     int     `json:"start_at"`
 	EndAt       int     `json:"end_at"`
 	Description string  `json:"description"`
-	Error       *Error  `json:"error,omitempty"`
+	Error
 }
 
 // URL returns the url to retrieve information about a user banned from an open channel

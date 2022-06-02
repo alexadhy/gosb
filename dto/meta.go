@@ -14,7 +14,7 @@ type SortedMetaArray []SortedMeta
 // SortedMetaArrayResponse is the response value to any endpoint(s) modifying sorted_metaarray
 type SortedMetaArrayResponse struct {
 	SortedMetaArray *SortedMetaArray `json:"sorted_metaarray,omitempty"`
-	Error           *Error           `json:"error,omitempty"`
+	Error
 }
 
 // Metadata is returned on any object that has metadata

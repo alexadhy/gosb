@@ -30,9 +30,9 @@ type UserResponse struct {
 	PushEnabled               *bool     `json:"push_enabled,omitempty"`
 	PushTriggerOption         *string   `json:"push_trigger_option,omitempty"`
 	DoNotDisturb              *bool     `json:"do_not_disturb,omitempty"`
-	Error                     *Error    `json:"error,omitempty"`
-	RemainingDuration         int       `json:"remaining_duration,omitempty"`
-	EndAt                     int       `json:"end_at,omitempty"`
+	Error
+	RemainingDuration int `json:"remaining_duration,omitempty"`
+	EndAt             int `json:"end_at,omitempty"`
 }
 
 // UserGetRequest is the request payload to user GET endpoint
@@ -57,7 +57,7 @@ func (u UserGetRequest) URL(baseURL string) string {
 type UserListResponse struct {
 	Users         []UserResponse `json:"users,omitempty"`
 	NextPageToken *string        `json:"next,omitempty"`
-	Error         *Error         `json:"error,omitempty"`
+	Error
 }
 
 // UserListRequest contains URL params / query string
@@ -143,7 +143,7 @@ type UserCreateSessionTokenResponse struct {
 	UserID    string `json:"user_id"`
 	Token     string `json:"token"`
 	ExpiresAt *int64 `json:"expires_at"`
-	Error     *Error `json:"error,omitempty"`
+	Error
 }
 
 // UserRevokeAllSessionTokenRequest is the request DTO to revoke all session token endpoint
@@ -220,7 +220,7 @@ func (u UserListGroupChannelRequest) URL(baseURL string) string {
 type UserListGroupChannelResponse struct {
 	GroupChannels []GroupChannelResponse `json:"channels,omitempty"`
 	NextPageToken *string                `json:"next,omitempty"`
-	Error         *Error                 `json:"error,omitempty"`
+	Error
 }
 
 // UserLeaveAllGroupChannelRequest is a payload for leaving all group_channel endpoint
