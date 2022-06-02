@@ -16,7 +16,10 @@ func (c *Client) CustomChannelListOperators(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CustomChannelRegisterOperators Registers one or more operators to a custom channel
@@ -29,7 +32,10 @@ func (c *Client) CustomChannelRegisterOperators(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CustomChannelUnregisterOperators cancels the registration of operators in a custom channel but leaves them in the channel.
@@ -42,7 +48,10 @@ func (c *Client) CustomChannelUnregisterOperators(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CustomChannelListSettings retrieves a list of the settings for all custom channel types.
@@ -54,7 +63,10 @@ func (c *Client) CustomChannelListSettings(
 	if err != nil {
 		return nil, err
 	}
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CustomChannelGetSettings retrieves a list of the settings for all custom channel types.
@@ -66,7 +78,10 @@ func (c *Client) CustomChannelGetSettings(
 	if err != nil {
 		return nil, err
 	}
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CustomChannelCreateSettings creates the settings for the channels with a custom channel type.
@@ -78,7 +93,10 @@ func (c *Client) CustomChannelCreateSettings(
 	if err != nil {
 		return nil, err
 	}
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CustomChannelUpdateSettings Updates the settings for the channels with a custom channel type.
@@ -90,7 +108,10 @@ func (c *Client) CustomChannelUpdateSettings(
 	if err != nil {
 		return nil, err
 	}
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CustomChannelDeleteSettings Deletes the settings for the channels with a custom channel type.
@@ -102,5 +123,8 @@ func (c *Client) CustomChannelDeleteSettings(
 	if err != nil {
 		return nil, err
 	}
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }

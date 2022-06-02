@@ -1,6 +1,8 @@
 package dto
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // SortedMeta is used for SortedMetaArray array
 type SortedMeta struct {
@@ -14,7 +16,7 @@ type SortedMetaArray []SortedMeta
 // SortedMetaArrayResponse is the response value to any endpoint(s) modifying sorted_metaarray
 type SortedMetaArrayResponse struct {
 	SortedMetaArray *SortedMetaArray `json:"sorted_metaarray,omitempty"`
-	Error
+	*Error
 }
 
 // Metadata is returned on any object that has metadata

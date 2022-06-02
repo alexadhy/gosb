@@ -1,6 +1,8 @@
 package dto
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // OpenChannelListOperatorsRequest is the DTO struct for listing open channel operators
 type OpenChannelListOperatorsRequest struct {
@@ -28,7 +30,7 @@ func (o OpenChannelListOperatorsRequest) URL(baseURL string) string {
 type OpenChannelListOperatorsResponse struct {
 	Operators     []UserResponse `json:"operators,omitempty"`
 	NextPageToken string         `json:"next,omitempty"`
-	Error
+	*Error
 }
 
 // OpenChannelRegisterOperatorRequest is the request payload for registering operator to an open channel
@@ -84,7 +86,7 @@ type OpenChannelResponse struct {
 	StartAt              *int           `json:"start_at,omitempty"`
 	EndAt                *int           `json:"end_at,omitempty"`
 	IsDynamicPartitioned *bool          `json:"is_dynamic_partitioned,omitempty"`
-	Error
+	*Error
 }
 
 // OpenChannelListRequest is the url query values for List open channels endpoint
@@ -112,7 +114,7 @@ func (o OpenChannelListRequest) URL(baseURL string) string {
 type OpenChannelListResponse struct {
 	Channels      []OpenChannelResponse `json:"channels,omitempty"`
 	NextPageToken string                `json:"next,omitempty"`
-	Error
+	*Error
 }
 
 // OpenChannelGetRequest is there to construct endpoint for get open channel
@@ -195,5 +197,5 @@ func (o OpenChannelListParticipantsRequest) URL(baseURL string) string {
 type OpenChannelListParticipantsResponse struct {
 	Participants  []UserResponse `json:"participants,omitempty"`
 	NextPageToken *string        `json:"next,omitempty"`
-	Error
+	*Error
 }

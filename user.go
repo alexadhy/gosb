@@ -14,7 +14,10 @@ func (c *Client) UserList(ctx context.Context, input *dto.UserListRequest) (*dto
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserView retrieves information of a user.
@@ -24,7 +27,10 @@ func (c *Client) UserView(ctx context.Context, input *dto.UserGetRequest) (*dto.
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserCreate creates a new user in the application. You can choose to authenticate the user with just their user ID,
@@ -35,7 +41,10 @@ func (c *Client) UserCreate(ctx context.Context, input *dto.UserCreateRequest) (
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserUpdate updates information of a user.
@@ -45,7 +54,10 @@ func (c *Client) UserUpdate(ctx context.Context, input *dto.UserUpdateRequest) (
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DeleteUser updates information of a user.
@@ -55,7 +67,10 @@ func (c *Client) DeleteUser(ctx context.Context, input *dto.UserDeleteRequest) (
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserIssueSessionToken creates a session token for user
@@ -65,7 +80,10 @@ func (c *Client) UserIssueSessionToken(ctx context.Context, input *dto.UserCreat
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserRevokeAllSessionTokens revokes all session token in the application
@@ -75,7 +93,10 @@ func (c *Client) UserRevokeAllSessionTokens(ctx context.Context, input *dto.User
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserListUserGroupChannels retrieves a list of the user's group channels.
@@ -85,7 +106,10 @@ func (c *Client) UserListUserGroupChannels(ctx context.Context, input *dto.UserL
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserLeaveGroupChannels makes the user leave all group channels.
@@ -95,7 +119,10 @@ func (c *Client) UserLeaveGroupChannels(ctx context.Context, input *dto.UserLeav
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserGetUnreadMessagesCount retrieves the total number of a user’s unread messages in group channels.
@@ -105,7 +132,10 @@ func (c *Client) UserGetUnreadMessagesCount(ctx context.Context, input *dto.Mess
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserGetUnreadItemsCount retrieves a set of total number of a user's unread messages, unread mentioned messages,

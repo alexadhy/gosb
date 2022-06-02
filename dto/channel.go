@@ -51,7 +51,7 @@ func (o ChannelGetInvitationPrefRequest) URL(baseURL string) string {
 // ChannelGetInvitationPrefResponse is the response payload to get invitation preference endpoint
 type ChannelGetInvitationPrefResponse struct {
 	AutoAccept *bool `json:"auto_accept,omitempty"`
-	Error
+	*Error
 }
 
 // ChannelUpdateInvitationPrefRequest is the request payload to update invitation preference endpoint

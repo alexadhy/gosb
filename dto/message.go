@@ -22,7 +22,7 @@ type ThreadInfo struct {
 	MostReplies   []map[string]any `json:"most_replies,omitempty"`
 	LastRepliedAt *int64           `json:"last_replied_at,omitempty"`
 	UpdatedAt     *int64           `json:"updated_at,omitempty"`
-	Error
+	*Error
 }
 
 // Message may contain Text, File, or Admin Message
@@ -31,7 +31,7 @@ type Message struct {
 	*FileMessage
 	*AdminMessage
 	MessageSurvivalSeconds *int `json:"message_survival_seconds,omitempty"`
-	Error
+	*Error
 }
 
 // UnmarshalJSON unmarshal Message type to its member type (FileMessage / TextMessage / AdminMessage)
@@ -181,7 +181,7 @@ func (m MessageListRequest) URL(baseURL string) string {
 // MessageListResponse is the response type for list messages endpoint
 type MessageListResponse struct {
 	Messages []Message `json:"messages,omitempty"`
-	Error
+	*Error
 }
 
 // MessageViewRequest is the request parameter & url values to get message endpoint
@@ -492,7 +492,7 @@ func (m MessageTotalCountInChannelRequest) URL(baseURL string) string {
 // MessageTotalCountInChannelResponse is the response type to total number of messages in a channel
 type MessageTotalCountInChannelResponse struct {
 	Total *int `json:"total,omitempty"`
-	Error
+	*Error
 }
 
 // MessageListThreadedRepliesRequest is the request URL constructor for list replies in a 1-depth thread
@@ -668,7 +668,7 @@ type MessageSearchResponse struct {
 	HasPrev       *bool     `json:"has_prev,omitempty"`
 	HasNext       *bool     `json:"has_next,omitempty"`
 	NextPageToken string    `json:"next,omitempty"`
-	Error
+	*Error
 }
 
 // URL returns URL string for SendBird's search message endpoint
@@ -711,7 +711,7 @@ func (m MessageMarkAllAsDeliveredRequest) URL(baseURL string) string {
 // MessageMarkAllAsDeliveredResponse is the response type to mark all as delivered request endpoint.
 type MessageMarkAllAsDeliveredResponse struct {
 	TS *int64 `json:"ts,omitempty"`
-	Error
+	*Error
 }
 
 // MessageMarkAllAsReadRequest is the request payload and URL params to mark all messages as read on group channel.
@@ -764,7 +764,7 @@ func (m MessageViewUnreadCountRequest) URL(baseURL string) string {
 // MessageViewUnreadCountResponse is the response type / payload to message view unread count URL
 type MessageViewUnreadCountResponse struct {
 	Unread map[string]any `json:"unread,omitempty"`
-	Error
+	*Error
 }
 
 // MessageTranslateRequest is the request payload to send to translate message endpoint

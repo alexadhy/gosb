@@ -17,7 +17,10 @@ func (c *Client) OpenChannelListOperators(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // OpenChannelRegisterOperators Registers one or more operators to an open channel
@@ -31,7 +34,10 @@ func (c *Client) OpenChannelRegisterOperators(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // OpenChannelUnregisterOperators cancels the registration of operators in an open channel but leaves them as participants
@@ -45,7 +51,10 @@ func (c *Client) OpenChannelUnregisterOperators(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // OpenChannelList list all open channels
@@ -56,7 +65,10 @@ func (c *Client) OpenChannelList(ctx context.Context, input *dto.OpenChannelList
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // OpenChannelGet retrieves information on an open channel.
@@ -67,7 +79,10 @@ func (c *Client) OpenChannelGet(ctx context.Context, input *dto.OpenChannelGetRe
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // OpenChannelCreate creates an open channel.
@@ -78,7 +93,10 @@ func (c *Client) OpenChannelCreate(ctx context.Context, input *dto.OpenChannelCr
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // OpenChannelUpdate Updates information on a specific open channel.
@@ -89,7 +107,10 @@ func (c *Client) OpenChannelUpdate(ctx context.Context, input *dto.OpenChannelUp
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // OpenChannelDelete deletes a specific open channel.
@@ -100,5 +121,8 @@ func (c *Client) OpenChannelDelete(ctx context.Context, input *dto.OpenChannelDe
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+ return nil, err
+ }
+ return result, nil
 }

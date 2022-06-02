@@ -16,7 +16,10 @@ func (c *Client) GroupChannelListOperators(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelRegisterOperators Registers one or more operators to a group channel
@@ -29,7 +32,10 @@ func (c *Client) GroupChannelRegisterOperators(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelUnregisterOperators cancels the registration of operators in a group channel but leaves them as members
@@ -42,7 +48,10 @@ func (c *Client) GroupChannelUnregisterOperators(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelList Retrieves a list of group channels or Supergroup channels in the application.
@@ -53,7 +62,10 @@ func (c *Client) GroupChannelList(ctx context.Context, input *dto.GroupChannelLi
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelGet retrieves information on a specific group channel or a Supergroup channel.
@@ -63,7 +75,10 @@ func (c *Client) GroupChannelGet(ctx context.Context, input *dto.GroupChannelGet
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelCreate creates a group channel or a Supergroup channel
@@ -73,7 +88,10 @@ func (c *Client) GroupChannelCreate(ctx context.Context, input *dto.GroupChannel
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelUpdate updates information on a specific group channel or a Supergroup channel.
@@ -83,7 +101,10 @@ func (c *Client) GroupChannelUpdate(ctx context.Context, input *dto.GroupChannel
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelDelete deletes specific group channel
@@ -93,7 +114,10 @@ func (c *Client) GroupChannelDelete(ctx context.Context, input *dto.GroupChannel
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelJoin allows a user to join a public group channel. This is only available
@@ -104,7 +128,10 @@ func (c *Client) GroupChannelJoin(ctx context.Context, input *dto.GroupChannelJo
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelLeave makes one or more users leave a specific group channel.
@@ -114,7 +141,10 @@ func (c *Client) GroupChannelLeave(ctx context.Context, input *dto.GroupChannelL
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelHide hides or archives a specific group channel from a user’s group channel list.
@@ -124,7 +154,10 @@ func (c *Client) GroupChannelHide(ctx context.Context, input *dto.GroupChannelHi
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelUnhide Unhides or unarchives a specific group channel and gets the channel appeared back in a user’s group channel list.
@@ -134,7 +167,10 @@ func (c *Client) GroupChannelUnhide(ctx context.Context, input *dto.GroupChannel
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelResetChatHistory Resets a user's chat history in a specific group channel.
@@ -144,7 +180,10 @@ func (c *Client) GroupChannelResetChatHistory(ctx context.Context, input *dto.Gr
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelViewInvitationPref retrieves channel invitation preference for a user's group channels.
@@ -154,7 +193,10 @@ func (c *Client) GroupChannelViewInvitationPref(ctx context.Context, input *dto.
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelUpdateInvitationPref Updates channel invitation preference for a user's group channels.
@@ -167,7 +209,10 @@ func (c *Client) GroupChannelUpdateInvitationPref(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelListMembers retrieves the members of a specific group channel.
@@ -180,7 +225,10 @@ func (c *Client) GroupChannelListMembers(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelCheckMembership checks whether the user is a member of a specific group channel.
@@ -193,7 +241,10 @@ func (c *Client) GroupChannelCheckMembership(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelInviteMember invites one or more users as members to a group channel.
@@ -206,7 +257,10 @@ func (c *Client) GroupChannelInviteMember(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelAcceptInvite Accepts an invitation from a group channel for a user to join.
@@ -219,7 +273,10 @@ func (c *Client) GroupChannelAcceptInvite(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GroupChannelDeclineInvite Declines an invitation from a group channel for a user to join.
@@ -232,5 +289,8 @@ func (c *Client) GroupChannelDeclineInvite(
 		return nil, err
 	}
 
-	return result, result.Error
+	if result.Error != nil {
+		return nil, err
+	}
+	return result, nil
 }

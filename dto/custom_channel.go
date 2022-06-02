@@ -1,6 +1,8 @@
 package dto
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // CustomChannelListOperatorsRequest is the DTO struct for listing custom channel operators
 type CustomChannelListOperatorsRequest struct {
@@ -28,7 +30,7 @@ func (o CustomChannelListOperatorsRequest) URL(baseURL string) string {
 type CustomChannelListOperatorsResponse struct {
 	Operators     []UserResponse `json:"operators,omitempty"`
 	NextPageToken *string        `json:"next,omitempty"`
-	Error
+	*Error
 }
 
 // CustomChannelRegisterOperatorRequest is the request payload for registering operator to an open channel
@@ -94,7 +96,7 @@ func (o CustomChannelListSettingsRequest) URL(baseURL string) string {
 type CustomChannelListSettingsResponse struct {
 	SettingList   []Settings `json:"channel_custom_type_settings,omitempty"`
 	NextPageToken *string    `json:"token,omitempty"`
-	Error
+	*Error
 }
 
 // CustomChannelGetSettingsRequest creates a request to get custom channel's settings
@@ -149,7 +151,7 @@ func (o CustomChannelDeleteSettingRequest) URL(baseURL string) string {
 // CustomChannelDefaultInvitationPreference is the response type to default invitation preference endpoint
 type CustomChannelDefaultInvitationPreference struct {
 	AutoAccept *bool `json:"auto_accept,omitempty"`
-	Error
+	*Error
 }
 
 // URL returns URL string for custom channel default invitation preference response
